@@ -1460,5 +1460,11 @@ renderRbx();initCP();detectCountry();
 function toggleTheme(){var on=document.body.classList.toggle("light");try{localStorage.setItem("vyrex-theme",on?"light":"dark");}catch(e){}var ic=document.querySelector("#nav-theme i");if(ic)ic.className=on?"fas fa-sun":"fas fa-moon";}
 (function(){try{if(localStorage.getItem("vyrex-theme")==="light"){document.body.classList.add("light");var ic=document.querySelector("#nav-theme i");if(ic)ic.className="fas fa-sun";}}catch(e){}})();
 </script>
+
+<!-- Vercel Speed Insights -->
+<script type="module">
+  import { injectSpeedInsights } from 'https://cdn.jsdelivr.net/npm/@vercel/speed-insights@1.0.12/dist/index.mjs';
+  injectSpeedInsights();
+</script>
 </body>
 </html>

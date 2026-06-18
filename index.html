@@ -1,0 +1,1464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VyreX — Official Reseller Network</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Quicksand:wght@300;400;500;600;700&family=Philosopher:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<!-- Preload background images (hero + 5 randomizer images) so navigation backgrounds appear instantly -->
+<link rel="preload" as="image" href="https://cdn.statically.io/gh/RedX29/VyreX@main/assets/background/BTB%20BACKGROUND%20(5).jpg">
+<link rel="preload" as="image" href="https://cdn.statically.io/gh/RedX29/VyreX@main/assets/background/NEW%20BTB%20BACKGROUND%20(1).png">
+<link rel="preload" as="image" href="https://cdn.statically.io/gh/RedX29/VyreX@main/assets/background/NEW%20BTB%20BACKGROUND%20(2).png">
+<link rel="preload" as="image" href="https://cdn.statically.io/gh/RedX29/VyreX@main/assets/background/NEW%20BTB%20BACKGROUND%20(3).png">
+<link rel="preload" as="image" href="https://cdn.statically.io/gh/RedX29/VyreX@main/assets/background/BTB%20BACKGROUND%20(4).jpg">
+<link rel="preload" as="image" href="https://cdn.statically.io/gh/RedX29/VyreX@main/assets/background/BTB%20BACKGROUND%20(5)%20REPLACEMENT.jpg">
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+<style>
+:root{
+  --dp:#0F0820;--ns:#1A0D2E;--pm:#2D1B4E;
+  --gold:#FFB84D;--sunset:#F5A623;--amber:#FF8C42;
+  --peach:#E8956B;--coral:#D97654;
+  --cream:#F5F1FF;--light:#E8E6F0;
+  --crimson:#C41E3A;--blood:#8B0000;
+  --bg:#050408;--bg2:#0A0810;--bg3:#100820;
+  --glass:rgba(15,8,32,.72);--glass2:rgba(26,13,46,.88);
+  --border:rgba(196,30,58,.18);--border-g:rgba(255,184,77,.15);
+  --glow-c:0 0 30px rgba(196,30,58,.5),0 0 80px rgba(139,0,0,.2);
+  --glow-g:0 0 20px rgba(255,184,77,.35),0 0 60px rgba(245,166,35,.12);
+  --ft:'Cinzel',serif;
+  --fb:'Quicksand',sans-serif;
+  --fa:'Philosopher',serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+::selection{background:var(--crimson);color:#fff}
+html,body{width:100%;height:100%;overflow:hidden}
+body{background:var(--bg);color:var(--cream);font-family:var(--fb);cursor:none}
+a,button{cursor:none;text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+
+/* ═══ CUSTOM CURSOR ═══ */
+#cur{position:fixed;z-index:99999;pointer-events:none;width:8px;height:8px;background:var(--gold);border-radius:50%;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s;box-shadow:0 0 12px rgba(255,184,77,.7)}
+#cur.big{width:14px;height:14px;background:#fff;box-shadow:0 0 16px rgba(255,255,255,.6)}
+#cur-ring{position:fixed;z-index:99998;pointer-events:none;width:38px;height:38px;border:1.5px solid rgba(255,184,77,.4);border-radius:50%;transform:translate(-50%,-50%);transition:width .35s cubic-bezier(.16,1,.3,1),height .35s cubic-bezier(.16,1,.3,1),opacity .3s,border-color .3s}
+#cur-ring.hover{width:54px;height:54px;border-color:rgba(255,184,77,.9);opacity:1}
+#cur-ring.click{width:24px;height:24px;border-color:#fff;opacity:.9}
+
+/* ═══ PARTICLES ═══ */
+#tsparticles{position:fixed;inset:0;z-index:1;pointer-events:none}
+
+/* ═══ PARALLAX BOKEH ═══ */
+.bokeh-layer{position:fixed;inset:0;z-index:0;pointer-events:none;perspective:800px}
+.bokeh-orb{position:absolute;border-radius:50%;filter:blur(2px);animation:orbFloat ease-in-out infinite alternate}
+@keyframes orbFloat{0%{transform:translateY(0) translateZ(0) scale(1)}50%{transform:translateY(-25px) translateZ(20px) scale(1.08)}100%{transform:translateY(8px) translateZ(-10px) scale(.96)}}
+
+/* ═══ NAV ═══ */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:.9rem 3.5rem;display:flex;justify-content:space-between;align-items:center;transition:background .4s}
+nav::before{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(5,4,8,.88),transparent);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,184,77,.08);transition:opacity .4s}
+nav.scrolled::before{background:rgba(5,4,8,.94);border-bottom-color:rgba(255,184,77,.15)}
+.nav-logo{position:relative;z-index:1;font-family:var(--ft);font-weight:900;font-size:1.5rem;letter-spacing:.1em;display:inline-flex;flex-direction:column;align-items:center;text-decoration:none;line-height:1}
+.nav-logo .logo-main{display:block}
+.nav-logo .x{color:#C41E3A;text-shadow:0 0 8px #C41E3A,0 0 16px rgba(196,30,58,.5)}
+.nav-logo .ja{display:block;text-align:center;font-family:serif;font-size:0.48rem;color:rgba(255,184,77,0.35);letter-spacing:0.22em;margin-top:0.05rem}
+.nav-links{position:relative;z-index:1;display:flex;gap:0;list-style:none}
+.nav-links a{font-family:var(--fa);font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(232,230,240,.4);padding:.5rem 1rem;transition:all .3s;position:relative;display:block}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:50%;right:50%;height:2px;background:linear-gradient(90deg,var(--gold),var(--sunset));transition:all .3s;box-shadow:var(--glow-g);border-radius:1px}
+.nav-links a:hover{color:var(--cream)}
+.nav-links a.anav{color:var(--gold)}
+.nav-links a.anav::after{left:15%;right:15%}
+.nav-right{position:relative;z-index:1;display:flex;align-items:center;gap:.8rem}
+.nav-curr-btn{font-family:var(--fa);font-size:.65rem;letter-spacing:.08em;padding:.3rem .75rem;border:1px solid rgba(255,184,77,.2);color:var(--gold);background:rgba(255,184,77,.04);border-radius:4px;transition:all .25s;display:flex;align-items:center;gap:.4rem}
+.nav-curr-btn:hover{background:rgba(255,184,77,.1);border-color:rgba(255,184,77,.4)}
+.curr-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px var(--gold);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
+.hamburger{display:none;flex-direction:column;gap:5px;padding:.5rem;z-index:201;position:relative;background:transparent;border:none;-webkit-appearance:none;appearance:none}
+.hamburger span{display:block;width:22px;height:2px;background:var(--cream);border-radius:1px;transition:all .3s}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
+/* ═══ CURRENCY PANEL ═══ */
+#curr-panel{position:fixed;top:56px;right:0;z-index:500;width:310px;background:var(--glass2);border:1px solid var(--border-g);border-top:none;border-radius:0 0 0 12px;transform:translateX(110%);transition:transform .42s cubic-bezier(.16,1,.3,1);box-shadow:-12px 12px 50px rgba(0,0,0,.7);backdrop-filter:blur(24px)}
+#curr-panel.open{transform:translateX(0)}
+#curr-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.cp-inner{padding:1.2rem 1.4rem}
+.cp-title{font-family:var(--fa);font-size:.62rem;letter-spacing:.25em;color:var(--gold);margin-bottom:.9rem;display:flex;justify-content:space-between;align-items:center;text-transform:uppercase}
+.cp-close{color:var(--cream);font-size:.65rem;padding:.2rem .5rem;border:1px solid var(--border-g);background:transparent;border-radius:3px;transition:all .2s}
+.cp-close:hover{color:var(--gold);border-color:var(--gold)}
+.cp-search{width:100%;background:rgba(255,255,255,.03);border:1px solid rgba(255,184,77,.08);border-radius:5px;color:var(--cream);font-family:var(--fb);font-size:.88rem;padding:.52rem .8rem;outline:none;margin-bottom:.7rem;transition:border .2s}
+.cp-search:focus{border-color:rgba(255,184,77,.35)}
+.cp-search::placeholder{color:rgba(232,230,240,.2)}
+.cp-list{max-height:320px;overflow-y:auto;display:grid;grid-template-columns:1fr 1fr;gap:.28rem}
+.cp-list::-webkit-scrollbar{width:3px}
+.cp-list::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
+.cp-item{padding:.45rem .65rem;background:rgba(255,255,255,.02);border:1px solid transparent;border-radius:4px;font-size:.78rem;color:rgba(232,230,240,.5);transition:all .15s;display:flex;align-items:center;gap:.4rem;cursor:pointer}
+.cp-item:hover,.cp-item.active{background:rgba(255,184,77,.06);border-color:rgba(255,184,77,.18);color:var(--cream)}
+.cp-item .flag{font-size:.85rem}
+.cp-item .cname{font-weight:600;font-size:.72rem;flex:1}
+.cp-item .ccur{font-family:var(--fa);font-size:.5rem;color:rgba(255,184,77,.45)}
+
+/* ═══ VIEWPORT ═══ */
+#vp{position:fixed;inset:0;overflow:hidden;z-index:2}
+.page{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;pointer-events:none;opacity:0;will-change:opacity,transform}
+.page.pact{opacity:1;pointer-events:all}
+.page::-webkit-scrollbar{width:4px}
+.page::-webkit-scrollbar-track{background:transparent}
+.page::-webkit-scrollbar-thumb{background:rgba(255,184,77,.2);border-radius:2px}
+.pw{padding-top:64px}
+
+/* ═══ SECTION SHARED ═══ */
+.sec{padding:4rem 5rem;max-width:1300px;margin:0 auto}
+.sec-sm{padding:2.5rem 5rem;max-width:1300px;margin:0 auto}
+.slbl{font-family:var(--fa);font-size:.65rem;letter-spacing:.4em;color:var(--gold);text-transform:uppercase;margin-bottom:.6rem;display:flex;align-items:center;gap:.8rem;opacity:.8}
+.slbl::before{content:'';width:28px;height:1.5px;background:linear-gradient(90deg,var(--gold),transparent);box-shadow:0 0 8px rgba(255,184,77,.3)}
+.stitle{font-family:var(--ft);font-size:clamp(1.8rem,4vw,3.2rem);font-weight:700;line-height:1.1;margin-bottom:1.5rem}
+.stitle .acc{background:linear-gradient(135deg,var(--gold),var(--sunset));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.rl{display:block;width:50px;height:2px;background:linear-gradient(90deg,var(--gold),transparent);margin:.6rem 0 1.8rem;border-radius:1px}
+.rv{opacity:0;transform:translateY(28px) translateZ(-20px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.rv.vis{opacity:1;transform:translateY(0) translateZ(0)}
+.glass-card{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--border-g);border-radius:10px;position:relative;overflow:hidden}
+.glass-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,184,77,.25),transparent)}
+
+/* ═══ BUTTONS ═══ */
+.btn-p{font-family:var(--fa);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.85rem 2.2rem;background:linear-gradient(135deg,var(--crimson),var(--blood));color:#fff;border:none;border-radius:6px;position:relative;overflow:hidden;transition:all .35s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-p::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);transform:translateX(-100%);transition:transform .5s}
+.btn-p:hover::before{transform:translateX(100%)}
+.btn-p:hover{box-shadow:var(--glow-c);transform:translateY(-2px)}
+.btn-o{font-family:var(--fa);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.85rem 2.2rem;background:transparent;color:var(--cream);border:1px solid rgba(255,184,77,.25);border-radius:6px;transition:all .35s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-o:hover{border-color:var(--gold);color:var(--gold);box-shadow:var(--glow-g);transform:translateY(-2px)}
+
+/* ═══ HERO PAGE ═══ */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;perspective:1000px}
+.hero::before{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse 80% 80% at 50% 46%,transparent 30%,rgba(26,13,46,.42) 72%,rgba(5,4,8,.82) 100%),linear-gradient(90deg,rgba(5,4,8,.86) 0%,rgba(5,4,8,.52) 46%,rgba(5,4,8,.2) 100%),radial-gradient(ellipse at 70% 60%,rgba(139,0,0,.14) 0%,transparent 50%)}
+.hero-left{position:relative;z-index:3;flex:0 0 55%;padding:0 2rem 0 5rem;max-width:55%}
+.hero-right{position:relative;z-index:2;flex:0 0 45%;max-width:45%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;height:100vh}
+.hero-eyebrow{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem;animation:fadeSlideUp 1s .3s both}
+.h-line{width:40px;height:1.5px;background:linear-gradient(90deg,transparent,var(--gold));box-shadow:0 0 8px rgba(255,184,77,.3)}
+.h-pre{font-family:var(--fa);font-size:.6rem;letter-spacing:.3em;color:rgba(255,184,77,.5)}
+.hero-title-wrap{position:relative;margin-bottom:.6rem;animation:fadeSlideUp 1s .5s both}
+.hero-title{font-family:var(--ft);font-size:clamp(4.5rem,12vw,10rem);font-weight:900;line-height:.85;letter-spacing:.06em}
+.hero-title-fill{background:linear-gradient(180deg,rgba(255,255,255,.95) 0%,rgba(232,230,240,.8) 40%,rgba(255,184,77,.65) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero-title .hero-x{-webkit-text-fill-color:var(--gold);filter:drop-shadow(0 0 15px rgba(255,184,77,.5))}
+.hero-glitch{position:absolute;inset:0;font-family:var(--ft);font-size:clamp(4.5rem,12vw,10rem);font-weight:900;line-height:.85;letter-spacing:.06em;color:var(--crimson);pointer-events:none;opacity:0;animation:glitch 8s infinite 4s}
+@keyframes glitch{0%,85%,100%{opacity:0}86%{opacity:.35;clip-path:polygon(0 15%,100% 15%,100% 22%,0 22%);transform:translateX(-4px)}88%{opacity:.25;clip-path:polygon(0 60%,100% 60%,100% 67%,0 67%);transform:translateX(4px)}90%{opacity:.3;clip-path:polygon(0 80%,100% 80%,100% 85%,0 85%);transform:translateX(-3px)}92%{opacity:0}}
+.hero-jp{font-family:serif;font-size:clamp(.75rem,1.5vw,1rem);letter-spacing:.55em;color:rgba(255,184,77,.35);margin-bottom:1.5rem;animation:fadeSlideUp 1s .7s both}
+.hero-sub{font-family:var(--fa);font-size:.85rem;letter-spacing:.2em;color:rgba(232,230,240,.45);margin-bottom:.4rem;animation:fadeSlideUp 1s .8s both}
+.hero-sub span{color:var(--gold)}
+.hero-desc{font-size:.95rem;color:rgba(232,230,240,.35);max-width:450px;line-height:1.8;font-weight:300;margin-bottom:2.5rem;animation:fadeSlideUp 1s .9s both}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;animation:fadeSlideUp 1s 1s both}
+.hero-stats{display:flex;gap:3rem;margin-top:3.5rem;padding-top:1.8rem;border-top:1px solid rgba(255,184,77,.08);animation:fadeSlideUp 1s 1.1s both}
+.hst-n{font-family:var(--ft);font-size:1.5rem;font-weight:700;color:var(--gold);text-shadow:0 0 12px rgba(255,184,77,.3)}
+.hst-l{font-family:var(--fa);font-size:.5rem;letter-spacing:.18em;color:rgba(232,230,240,.35);text-transform:uppercase;margin-top:.2rem}
+@keyframes fadeSlideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+/* Hero Character Art */
+.hero-character{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;animation:charFloat 6s ease-in-out infinite,fadeIn 1.5s .5s both}
+@keyframes charFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.hero-char-glow{position:absolute;width:400px;height:500px;border-radius:50%;background:radial-gradient(ellipse,rgba(196,30,58,.12) 0%,rgba(255,184,77,.06) 40%,transparent 70%);filter:blur(40px);animation:glowPulse 4s ease-in-out infinite alternate}
+@keyframes glowPulse{0%{opacity:.5;transform:scale(.95)}100%{opacity:1;transform:scale(1.05)}}
+.hero-char-svg{position:relative;z-index:1;width:340px;height:560px;filter:drop-shadow(0 0 40px rgba(196,30,58,.25)) drop-shadow(0 0 80px rgba(255,184,77,.1))}
+.hero-petals{position:absolute;inset:0;pointer-events:none;z-index:2}
+.hero-petal{position:absolute;border-radius:50% 0 50% 0;opacity:0;animation:heroPetalFloat linear infinite}
+@keyframes heroPetalFloat{0%{opacity:0;transform:translateY(0) rotate(0)}10%{opacity:.7}90%{opacity:.4}100%{opacity:0;transform:translateY(-200px) rotate(360deg) translateX(80px)}}
+
+/* ═══ ABOUT PAGE ═══ */
+.about-grid{display:grid;grid-template-columns:280px 1fr;gap:5rem;align-items:start}
+.about-card{position:relative}
+.about-card-frame{position:absolute;inset:-8px;border:1px solid rgba(255,184,77,.12);border-radius:12px;pointer-events:none}
+.about-card-frame::before{content:'';position:absolute;top:-1px;left:-1px;width:20px;height:20px;border-top:2px solid var(--gold);border-left:2px solid var(--gold);border-radius:4px 0 0 0}
+.about-card-frame::after{content:'';position:absolute;bottom:-1px;right:-1px;width:20px;height:20px;border-bottom:2px solid var(--gold);border-right:2px solid var(--gold);border-radius:0 0 4px 0}
+.about-avatar{width:100%;aspect-ratio:3/4;border-radius:8px;overflow:hidden;position:relative;background:linear-gradient(135deg,var(--ns),var(--pm))}
+.about-avatar svg{width:100%;height:100%}
+.about-avatar::after{content:'';position:absolute;bottom:0;left:0;right:0;height:40%;background:linear-gradient(transparent,rgba(5,4,8,.9))}
+.about-card-body{padding:1.4rem;background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--border-g);border-top:none;border-radius:0 0 8px 8px}
+.about-card-body::before{content:'';position:absolute;left:0;width:2px;height:100%;background:linear-gradient(to bottom,var(--gold),transparent)}
+.aname{font-family:var(--ft);font-size:1rem;font-weight:700;margin-bottom:.2rem}
+.arole{font-family:var(--fa);font-size:.6rem;color:var(--gold);letter-spacing:.12em;margin-bottom:.85rem;opacity:.8}
+.atags{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.9rem}
+.atag{font-family:var(--fa);font-size:.5rem;letter-spacing:.06em;padding:.2rem .55rem;background:rgba(255,184,77,.06);border:1px solid rgba(255,184,77,.15);border-radius:20px;color:rgba(255,184,77,.65)}
+.astats{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;padding-top:.9rem;border-top:1px solid rgba(255,184,77,.08)}
+.asn{font-family:var(--ft);font-size:1.2rem;font-weight:700;color:var(--gold);text-shadow:var(--glow-g)}
+.asl{font-size:.55rem;letter-spacing:.08em;color:rgba(232,230,240,.35);text-transform:uppercase;margin-top:.15rem}
+.atxt p{font-size:.95rem;line-height:1.9;color:rgba(232,230,240,.5);margin-bottom:1rem;font-weight:300}
+.atxt p strong{color:var(--gold);font-weight:500}
+.feat-list{display:flex;flex-direction:column;gap:.55rem;margin-top:1.5rem}
+.feat-item{display:flex;align-items:center;gap:.7rem;font-size:.88rem;color:rgba(232,230,240,.5)}
+.feat-item i{color:var(--gold);font-size:.55rem;width:16px;text-align:center}
+
+/* ═══ SERVICES PAGE ═══ */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:2.5rem}
+.svc{padding:2rem;border-radius:10px;position:relative;overflow:hidden;transition:all .4s}
+.svc::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--sunset));transition:width .4s}
+.svc:hover{transform:translateY(-5px) translateZ(10px);border-color:rgba(255,184,77,.2);box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.svc:hover::after{width:100%}
+.svc-num{position:absolute;top:.8rem;right:1.2rem;font-family:var(--ft);font-size:3rem;font-weight:700;color:rgba(255,184,77,.04)}
+.svc-ico{width:42px;height:42px;color:var(--gold);margin-bottom:1.2rem;font-size:1.5rem;display:flex;align-items:center;justify-content:center}
+.svc-t{font-family:var(--ft);font-size:.88rem;font-weight:700;letter-spacing:.05em;margin-bottom:.6rem}
+.svc-d{font-size:.85rem;line-height:1.75;color:rgba(232,230,240,.4);font-weight:300}
+.steps-wrap{display:grid;grid-template-columns:repeat(4,1fr);margin-top:4rem;position:relative}
+.steps-wrap::before{content:'';position:absolute;top:22px;left:10%;width:80%;height:1px;background:linear-gradient(90deg,transparent,rgba(255,184,77,.2),rgba(255,184,77,.2),transparent)}
+.step{text-align:center;padding:0 1rem}
+.step-n{width:44px;height:44px;background:var(--bg);border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:var(--ft);font-weight:700;font-size:.82rem;color:var(--gold);margin:0 auto 1rem;border-radius:50%;box-shadow:0 0 12px rgba(255,184,77,.12)}
+.step-t{font-family:var(--ft);font-size:.72rem;font-weight:700;margin-bottom:.4rem}
+.step-d{font-size:.78rem;line-height:1.6;color:rgba(232,230,240,.35);font-weight:300}
+
+/* ═══ BUY PAGE ═══ */
+.buy-tabs{display:flex;gap:.5rem;margin-bottom:2.5rem}
+.buy-tab{font-family:var(--fa);font-size:.65rem;font-weight:700;letter-spacing:.1em;padding:.65rem 1.8rem;background:transparent;border:1px solid rgba(255,184,77,.1);color:rgba(232,230,240,.4);transition:all .25s;border-radius:6px;display:inline-flex;align-items:center;gap:.5rem}
+.buy-tab.active{background:linear-gradient(135deg,var(--crimson),var(--blood));border-color:var(--crimson);color:#fff;box-shadow:var(--glow-c)}
+.buy-tab:hover:not(.active){border-color:rgba(255,184,77,.25);color:var(--cream)}
+.buy-sec{display:none}.buy-sec.active{display:block}
+.cp-intro{font-size:.88rem;color:rgba(232,230,240,.4);margin-bottom:2rem;line-height:1.8;max-width:600px}
+.cp-intro strong{color:var(--gold)}
+.cp-lbl{font-family:var(--fa);font-size:.6rem;letter-spacing:.25em;color:rgba(255,184,77,.45);text-transform:uppercase;margin-bottom:.75rem}
+.cp-models-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem;margin-bottom:2rem}
+.cp-card{border-radius:8px;padding:0.8rem;position:relative;overflow:hidden;transition:all .3s;border:2px solid transparent;cursor:pointer}
+.cp-card:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.5)}
+.cp-card.sel{border-color:rgba(255,184,77,.5)!important;box-shadow:0 0 20px rgba(255,184,77,.12)!important}
+.cp-card.sel::after{content:'\2713';position:absolute;bottom:.6rem;right:.65rem;width:18px;height:18px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.55rem;color:var(--bg);line-height:18px;text-align:center;font-weight:700}
+.cp-card-name{font-family:var(--ft);font-weight:700;font-size:.88rem;margin-bottom:.1rem;color:#fff}
+.cp-card-desc{font-size:.65rem;color:rgba(255,255,255,.55);margin-bottom:.75rem}
+.cp-card-specs{display:grid;grid-template-columns:1fr 1fr 1fr}
+.cp-sv{font-weight:700;font-size:.85rem;color:#fff}.cp-sl{font-size:.5rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.06em}
+.cpu-bal{color:#4de6b3!important}.cpu-bet{color:var(--gold)!important}.cpu-uf{color:var(--amber)!important}
+.cp-chip{position:absolute;top:.7rem;right:.7rem;width:30px;height:30px;border-radius:6px;overflow:hidden;display:flex;align-items:center;justify-content:center;font-family:var(--ft);font-size:.45rem;font-weight:900;color:rgba(255,255,255,.7);background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.12)}
+.cp-teal{background:linear-gradient(135deg,#00c896,#007a60)}.cp-blue{background:linear-gradient(135deg,#4db8ff,#1a6abf)}
+.cp-green{background:linear-gradient(135deg,#00d4a0,#008065)}.cp-purple{background:linear-gradient(135deg,#b87fff,#7030cc)}
+.cp-cyan{background:linear-gradient(135deg,#00e5cc,#00908a)}
+.cp-sel-row{display:flex;gap:2.5rem;margin-bottom:1.8rem;flex-wrap:wrap}
+.cp-sel-grp{display:flex;flex-direction:column;gap:.5rem}
+.cp-opts{display:flex;gap:.4rem;flex-wrap:wrap}
+.cp-opt{font-family:var(--fb);font-size:.85rem;font-weight:600;padding:.38rem .95rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,184,77,.08);color:rgba(232,230,240,.4);transition:all .2s;border-radius:5px;cursor:pointer}
+.cp-opt.sel{background:rgba(255,184,77,.1);border-color:var(--gold);color:var(--gold)}
+.cp-opt:hover:not(.sel){border-color:rgba(255,184,77,.2);color:var(--cream)}
+.cp-games-row{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.25rem}
+.cp-game-ico{width:32px;height:32px;border-radius:7px;overflow:hidden;flex-shrink:0;border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:.42rem;font-weight:700;color:rgba(255,255,255,.45);background:rgba(255,255,255,.04)}
+.cp-periods-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-bottom:2rem}
+.cp-period{border-radius:8px;padding:1rem 1.1rem;position:relative;transition:all .2s;cursor:pointer}
+.cp-period.sel{border-color:var(--gold)!important;background:rgba(255,184,77,.04)!important;box-shadow:0 0 15px rgba(255,184,77,.08)}
+.cp-period.sel::after{content:'\2713';position:absolute;bottom:.5rem;right:.6rem;width:15px;height:15px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.5rem;color:var(--bg);line-height:15px;text-align:center}
+.cp-period:hover:not(.sel){border-color:rgba(255,184,77,.2)}
+.cp-p-lbl{font-family:var(--fa);font-size:.7rem;font-weight:700;margin-bottom:.55rem;display:flex;align-items:center;gap:.4rem;flex-wrap:wrap}
+.badge-disc{font-family:var(--fa);font-size:.48rem;padding:.1rem .32rem;background:var(--gold);color:var(--bg);border-radius:3px;font-weight:700}
+.badge-vx{font-family:var(--fa);font-size:.48rem;padding:.1rem .32rem;background:var(--crimson);color:#fff;border-radius:3px;font-weight:700}
+.cp-p-orig{font-size:.68rem;color:rgba(232,230,240,.3);text-decoration:line-through;margin-bottom:.1rem}
+.cp-p-price{font-family:var(--ft);font-size:1.15rem;font-weight:700;line-height:1.1}
+.cp-p-per{font-family:var(--fa);font-size:.56rem;color:rgba(232,230,240,.3);margin-top:.18rem}
+.cp-buy-bar{display:flex;align-items:center;justify-content:space-between;padding:1.3rem 1.8rem;border-radius:10px;flex-wrap:wrap;gap:1rem}
+.cp-buy-sum{font-size:.82rem;color:rgba(232,230,240,.45)}
+.cp-buy-sum strong{color:var(--cream);font-family:var(--ft);font-size:.85rem}
+.cp-buy-price{font-family:var(--ft);font-size:1.5rem;font-weight:700;color:var(--gold);text-shadow:var(--glow-g)}
+/* Robux */
+.rbx-tabs{display:flex;gap:.45rem;margin-bottom:2rem}
+.rbx-tab{font-family:var(--fa);font-size:.62rem;font-weight:700;letter-spacing:.08em;padding:.5rem 1.3rem;background:transparent;border:1px solid rgba(255,184,77,.1);color:rgba(232,230,240,.38);transition:all .2s;border-radius:5px;cursor:pointer}
+.rbx-tab.active{background:linear-gradient(135deg,var(--crimson),var(--blood));border-color:var(--crimson);color:#fff}
+.rbx-layout{display:grid;grid-template-columns:1fr 280px;gap:1.6rem;align-items:start}
+.rbx-tbl{border-radius:10px;overflow:hidden}
+.rbx-thead{display:grid;grid-template-columns:1fr 1fr 1fr;background:rgba(255,184,77,.04);border-bottom:1px solid var(--border-g)}
+.rbx-th{font-family:var(--fa);font-size:.55rem;letter-spacing:.15em;color:rgba(255,184,77,.45);padding:.6rem 1rem;text-transform:uppercase}
+.rbx-row{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid rgba(255,184,77,.03);transition:background .15s}
+.rbx-row:hover{background:rgba(255,184,77,.03)}
+.rbx-cell{padding:.65rem 1rem;font-size:.85rem;display:flex;align-items:center;gap:.4rem}
+.rbx-cell.rb{font-family:var(--ft);font-size:.82rem;font-weight:700}
+.rbx-cell.pr{color:var(--gold);font-family:var(--fa);font-size:.78rem}
+.rbx-cell.ph{color:rgba(232,230,240,.3);font-family:var(--fa);font-size:.68rem}
+.rbxi{width:13px;height:13px;background:var(--gold);border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.44rem;font-weight:700;color:var(--bg)}
+.rbx-sb{display:flex;flex-direction:column;gap:.9rem}
+.rsc{border-radius:8px;padding:1.3rem;position:relative}
+.rsc::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(to bottom,var(--gold),transparent);border-radius:2px}
+.rsc-t{font-family:var(--ft);font-size:.7rem;font-weight:700;margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
+.rsc-t::after{content:'';flex:1;height:1px;background:rgba(255,184,77,.06)}
+.gift-r{font-family:var(--ft);font-size:1.2rem;font-weight:700;color:var(--gold);text-shadow:var(--glow-g);margin-bottom:.2rem}
+.gift-s{font-size:.74rem;color:rgba(232,230,240,.3);margin-bottom:.6rem}
+.ri{display:flex;align-items:flex-start;gap:.45rem;font-size:.76rem;color:rgba(232,230,240,.4);line-height:1.5;margin-bottom:.38rem}
+.ri i{color:var(--gold);flex-shrink:0;font-size:.4rem;margin-top:.3rem}
+.rbx-order{margin-top:2.2rem;padding-top:2.2rem;border-top:1px solid rgba(255,184,77,.05)}
+.rbx-order-t{font-family:var(--ft);font-size:.95rem;font-weight:700;margin-bottom:.3rem}
+.rbx-order-d{font-size:.82rem;color:rgba(232,230,240,.35);margin-bottom:1.4rem}
+.buy-cards{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.bc{border-radius:10px;padding:1.8rem;position:relative;overflow:hidden;transition:all .35s}
+.bc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent)}
+.bc:hover{border-color:rgba(255,184,77,.2);box-shadow:0 16px 50px rgba(0,0,0,.4);transform:translateY(-3px)}
+.bc-ico{font-size:1.3rem;color:var(--gold);margin-bottom:.9rem}
+.bc-t{font-family:var(--ft);font-size:.8rem;font-weight:700;margin-bottom:.4rem}
+.bc-d{font-size:.8rem;color:rgba(232,230,240,.35);line-height:1.65;margin-bottom:1.1rem}
+.bc-btn{display:inline-flex;align-items:center;gap:.45rem;padding:.6rem 1.4rem;background:linear-gradient(135deg,var(--crimson),var(--blood));color:#fff;font-family:var(--fa);font-size:.6rem;font-weight:700;letter-spacing:.08em;border-radius:5px;transition:all .3s}
+.bc-btn:hover{box-shadow:var(--glow-c)}
+
+/* ═══ PARTNERS ═══ */
+.pg{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:2.5rem}
+.pcard{border-radius:10px;padding:1.8rem 2rem;display:flex;align-items:center;gap:1.4rem;transition:all .35s}
+.pcard::after{content:'';position:absolute;top:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,rgba(255,184,77,.2),transparent);transform:scaleX(0);transform-origin:center;transition:transform .35s}
+.pcard:hover{border-color:rgba(255,184,77,.2);box-shadow:0 14px 50px rgba(0,0,0,.4)}
+.pcard:hover::after{transform:scaleX(1)}
+.plogo{width:58px;height:58px;border-radius:50%;border:2px solid rgba(255,184,77,.15);overflow:hidden;flex-shrink:0;background:linear-gradient(135deg,var(--ns),var(--pm));display:flex;align-items:center;justify-content:center;font-family:var(--ft);font-weight:700;color:var(--gold)}
+.pn{font-family:var(--ft);font-size:.92rem;font-weight:700;margin-bottom:.25rem}
+.pd{font-size:.78rem;color:rgba(232,230,240,.38);line-height:1.55;margin-bottom:.7rem}
+.plinks{display:flex;gap:.5rem;flex-wrap:wrap}
+.plink{font-family:var(--fa);font-size:.56rem;letter-spacing:.06em;padding:.25rem .7rem;border:1px solid rgba(255,184,77,.1);color:rgba(255,184,77,.45);border-radius:4px;transition:all .2s}
+.plink:hover{border-color:var(--gold);color:var(--gold)}
+.pcard.empty{opacity:.2;pointer-events:none}
+.empty-pl{width:58px;height:58px;border-radius:50%;border:1px dashed rgba(232,230,240,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.2rem;color:rgba(232,230,240,.15)}
+
+/* ═══ TEAM ═══ */
+.team-hr{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;flex-wrap:wrap;gap:.9rem}
+.tcnt{font-family:var(--fa);font-size:.6rem;letter-spacing:.1em;padding:.3rem .85rem;background:rgba(255,184,77,.05);border:1px solid rgba(255,184,77,.12);border-radius:20px;color:var(--gold)}
+.team-empty{text-align:center;padding:4.5rem 2rem;border:1px dashed rgba(255,184,77,.08);border-radius:12px}
+.te-ico{width:56px;height:56px;border:1.5px solid rgba(255,184,77,.12);display:flex;align-items:center;justify-content:center;margin:0 auto .9rem;border-radius:50%;font-size:1.3rem;color:rgba(255,184,77,.2)}
+.te-t{font-family:var(--ft);font-size:.72rem;letter-spacing:.08em;color:rgba(232,230,240,.35);margin-bottom:.3rem}
+.te-s{font-size:.8rem;color:rgba(232,230,240,.2)}
+
+/* ═══ APPLY ═══ */
+.apply-sv{position:relative}.apply-sv.hidden{display:none}
+.partner-layout,.reseller-layout{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.apply-info p,.res-info p{font-size:.92rem;color:rgba(232,230,240,.45);line-height:1.85;font-weight:300;margin-bottom:.9rem}
+.anote{background:rgba(255,184,77,.03);border:1px solid rgba(255,184,77,.1);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:1.1rem 1.4rem;margin-bottom:1.6rem}
+.anote p{font-size:.82rem;color:rgba(232,230,240,.48);line-height:1.65;margin:0}
+.anote strong{color:var(--gold)}
+.fw{border-radius:10px;padding:2rem;position:relative}
+.fw::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(to bottom,var(--gold),transparent);border-radius:2px}
+.fw-t{font-family:var(--ft);font-size:.85rem;font-weight:700;letter-spacing:.06em;margin-bottom:.25rem}
+.fw-s{font-size:.76rem;color:rgba(232,230,240,.3);margin-bottom:1.5rem}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.fg{display:flex;flex-direction:column;gap:.32rem}
+.fg.full{grid-column:1/-1}
+.fg label{font-family:var(--fa);font-size:.55rem;letter-spacing:.14em;color:rgba(232,230,240,.35);text-transform:uppercase;display:flex;align-items:center;gap:.32rem}
+.fg label .req{color:var(--crimson)}.fg label .opt{font-size:.46rem;color:rgba(255,184,77,.45);padding:.1rem .3rem;border:1px solid rgba(255,184,77,.12);border-radius:3px}
+.fg input,.fg select,.fg textarea{background:rgba(255,255,255,.025);border:1px solid rgba(255,184,77,.06);border-radius:6px;color:var(--cream);font-family:var(--fb);font-size:.9rem;padding:.58rem .82rem;outline:none;transition:border-color .2s;width:100%}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:rgba(255,184,77,.3)}
+.fg input::placeholder,.fg textarea::placeholder{color:rgba(232,230,240,.18)}
+.fg select option{background:var(--ns)}
+.fg textarea{resize:vertical;min-height:68px}
+.fg input[type="file"]{font-size:.74rem;color:rgba(232,230,240,.35);padding:.46rem .82rem}
+.fg input[type="file"]::-webkit-file-upload-button{background:rgba(255,184,77,.06);border:1px solid rgba(255,184,77,.15);color:var(--gold);font-family:var(--fa);font-size:.54rem;padding:.28rem .62rem;margin-right:.65rem;border-radius:4px;cursor:pointer}
+.email-err{font-family:var(--fa);font-size:.54rem;color:var(--crimson);margin-top:.22rem;display:none}
+.sub-btn{width:100%;font-family:var(--fa);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.9rem;background:linear-gradient(135deg,var(--crimson),var(--blood));color:#fff;border:none;border-radius:6px;transition:all .3s;margin-top:1rem;display:flex;align-items:center;justify-content:center;gap:.52rem;cursor:pointer}
+.sub-btn:hover:not(:disabled){box-shadow:var(--glow-c);transform:translateY(-1px)}
+.sub-btn:disabled{opacity:.4;cursor:not-allowed}
+.sub-spin{width:12px;height:12px;border:2px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;display:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+.form-ok{display:none;text-align:center;padding:2.5rem 1rem}
+.fok-ico{width:52px;height:52px;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;margin:0 auto .9rem;border-radius:50%;font-size:1.3rem;box-shadow:var(--glow-g);color:var(--gold)}
+.fok-t{font-family:var(--ft);font-size:.85rem;font-weight:700;margin-bottom:.45rem}
+.fok-d{font-size:.82rem;color:rgba(232,230,240,.35);line-height:1.65}
+.back-btn{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--fa);font-size:.62rem;letter-spacing:.12em;color:rgba(232,230,240,.35);padding:.4rem 0;margin-bottom:1.6rem;transition:color .2s}
+.back-btn:hover{color:var(--gold)}
+.res-cta{margin-top:2.2rem;border-radius:10px;padding:1.5rem 1.8rem;position:relative;overflow:hidden;transition:all .35s}
+.res-cta::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent)}
+.res-cta:hover{border-color:rgba(255,184,77,.2);box-shadow:0 10px 40px rgba(0,0,0,.35)}
+.res-cta-tag{font-family:var(--fa);font-size:.55rem;letter-spacing:.3em;color:var(--gold);margin-bottom:.5rem;opacity:.8}
+.res-cta-t{font-family:var(--ft);font-size:.9rem;font-weight:700;margin-bottom:.4rem}
+.res-cta-d{font-size:.8rem;color:rgba(232,230,240,.38);line-height:1.6;margin-bottom:1.1rem}
+
+/* ═══ ORDER MODAL ═══ */
+#om{position:fixed;inset:0;z-index:1500;display:none;align-items:center;justify-content:center;background:rgba(5,4,8,.88);backdrop-filter:blur(16px)}
+#om.open{display:flex}
+.om-box{background:var(--glass2);border:1px solid var(--border-g);border-radius:14px;padding:2.5rem;max-width:450px;width:90%;position:relative;backdrop-filter:blur(30px)}
+.om-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);border-radius:14px 14px 0 0}
+.om-close{position:absolute;top:1rem;right:1rem;font-family:var(--fa);font-size:.62rem;color:rgba(232,230,240,.4);padding:.28rem .55rem;border:1px solid rgba(255,184,77,.1);background:transparent;border-radius:5px;transition:all .2s}
+.om-close:hover{color:var(--gold);border-color:var(--gold)}
+.om-tag{font-family:var(--fa);font-size:.58rem;letter-spacing:.25em;color:var(--gold);margin-bottom:.5rem}
+.om-title{font-family:var(--ft);font-size:1.15rem;font-weight:700;margin-bottom:.25rem}
+.om-cfg{font-family:var(--fa);font-size:.6rem;color:rgba(232,230,240,.35);margin-bottom:.25rem;letter-spacing:.05em}
+.om-price{font-family:var(--ft);font-size:1.7rem;font-weight:700;color:var(--gold);text-shadow:var(--glow-g);margin-bottom:.5rem}
+.om-sub{font-size:.82rem;color:rgba(232,230,240,.38);margin-bottom:1.5rem;line-height:1.6}
+.om-btns{display:flex;flex-direction:column;gap:.7rem}
+.om-btn{display:flex;align-items:center;gap:.8rem;padding:1rem 1.4rem;border-radius:8px;border:1px solid var(--border-g);background:rgba(255,255,255,.02);transition:all .25s;font-family:var(--fa);font-size:.82rem}
+.om-btn:hover{border-color:rgba(255,184,77,.2);background:rgba(255,184,77,.04);transform:translateX(4px)}
+.om-btn-ico{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--ns),var(--pm));display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--gold)}
+
+/* ═══ NOTIF ═══ */
+#notif{position:fixed;top:5rem;right:1.5rem;z-index:600;background:var(--glass2);border:1px solid var(--border-g);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:.7rem 1.2rem;font-family:var(--fa);font-size:.65rem;letter-spacing:.06em;color:var(--cream);transform:translateX(130%);transition:transform .35s cubic-bezier(.16,1,.3,1);max-width:260px;backdrop-filter:blur(20px)}
+#notif.show{transform:translateX(0)}
+#notif.err{border-left-color:var(--crimson)}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:1024px){
+  .nav-links{position:fixed;inset:0;background:rgba(5,4,8,.96);backdrop-filter:blur(30px);flex-direction:column;align-items:center;justify-content:center;gap:1rem;z-index:199;display:none}
+  .nav-links.mob-open{display:flex}
+  .nav-links a{font-size:1.1rem;padding:1rem;letter-spacing:.2em}
+  .hamburger{display:flex}
+  nav{padding:.9rem 1.5rem}
+  .sec{padding:3rem 1.5rem}.sec-sm{padding:2rem 1.5rem}
+  .hero{flex-direction:column;text-align:center}
+  .hero-left{flex:1 1 auto;max-width:100%;padding:2rem 1.5rem;order:2}
+  .hero-right{flex:1 1 auto;max-width:100%;height:auto;min-height:40vh;order:1}
+  .hero-char-svg{width:200px;height:330px}
+  .hero-stats{flex-wrap:wrap;justify-content:center;gap:1.5rem}
+  .about-grid{grid-template-columns:1fr;gap:2rem}
+  .about-grid .about-card{max-width:300px;margin:0 auto}
+  .svc-grid{grid-template-columns:1fr}
+  .steps-wrap{grid-template-columns:1fr 1fr;gap:1.5rem}.steps-wrap::before{display:none}
+  .cp-models-grid{grid-template-columns:1fr 1fr}
+  .cp-periods-grid{grid-template-columns:1fr 1fr}
+  .rbx-layout{grid-template-columns:1fr}
+  .buy-cards{grid-template-columns:1fr}
+  .pg{grid-template-columns:1fr}
+  .partner-layout,.reseller-layout{grid-template-columns:1fr;gap:2rem}
+  .hero-title{font-size:clamp(3rem,10vw,7rem)}
+}
+@media(max-width:640px){
+  .cp-models-grid,.cp-periods-grid{grid-template-columns:1fr}
+  .fgrid{grid-template-columns:1fr}.fg.full{grid-column:1}
+  .hero-btns{flex-direction:column;align-items:center}
+}
+@media(prefers-reduced-motion:reduce){
+  /* Tone down busy looping decoration only — keep core hero/transition motion (site identity). */
+  #tsparticles,.bokeh-layer,.hero-petal,.hero-dust{display:none!important}
+  .bokeh-orb,.curr-dot,.hero-pulse{animation:none!important}
+  #slash-overlay{display:none!important}
+  .rv{opacity:1;transform:none}
+}
+
+/* ═══ ACCESSIBILITY · FOCUS (cursor is hidden, so keyboard ring is essential) ═══ */
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:5px;box-shadow:0 0 0 4px rgba(255,184,77,.18)}
+nav .nav-links a:focus-visible{outline-offset:2px}
+
+/* ═══ TOUCH DEVICES · restore native cursor, drop the bespoke one ═══ */
+@media (hover:none),(pointer:coarse){
+  html,body{cursor:auto!important}
+  a,button,[onclick],.cp-card,.cp-opt,.cp-period,.cp-item{cursor:pointer!important}
+  #cur,#cur-ring{display:none!important}
+}
+
+/* (Hero sunset-sky CSS removed — superseded by the Mirai wallpaper layer in the redesign block below.) */
+
+/* ═══════════════════════════════════════════════════════
+   ═══ REDESIGN ADDITIONS (glassmorphism · transitions) ═══
+   ═══════════════════════════════════════════════════════ */
+
+/* — Iridescent hover (shared across cards) — */
+.iri{transition:border-color .35s,box-shadow .35s,transform .35s}
+.iri:hover{border-color:rgba(255,184,77,.45)!important;box-shadow:0 0 0 1px rgba(255,184,77,.25),0 0 22px rgba(196,30,58,.22),0 0 42px rgba(77,184,255,.12),0 18px 50px rgba(0,0,0,.45)}
+
+/* — Hero moving 3D background (slow zoom + pulse) — */
+/* Mirai wallpaper isolated on its own layer so filter/zoom never reach the hero text */
+.hero-bg{position:absolute;inset:0;z-index:0;background:url('https://cdn.statically.io/gh/RedX29/VyreX@main/assets/background/BTB%20BACKGROUND%20(5).jpg') center/cover no-repeat,var(--bg);filter:brightness(.95) contrast(1.03) blur(.3px);animation:heroDrift 14s ease-in-out infinite alternate;will-change:transform}
+.hero::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;box-shadow:inset 0 0 180px 40px rgba(5,4,8,.5),inset 0 0 70px 10px rgba(5,4,8,.28)}
+.hero-dust{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.hero-pulse{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(circle at 50% 38%,rgba(196,30,58,.10),transparent 62%);animation:softPulse 6s ease-in-out infinite alternate}
+
+/* — Hero two-column glass layout — */
+.hero-h1{font-family:var(--ft);font-size:clamp(2.2rem,4.6vw,3.9rem);font-weight:900;line-height:1.05;letter-spacing:.02em;margin-bottom:1.1rem;animation:fadeSlideUp 1s .5s both}
+.hero-h1 .acc{background:linear-gradient(135deg,var(--gold),var(--sunset));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.btn-w{font-family:var(--fa);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.85rem 2.2rem;background:#fff;color:#1A0D2E;border:none;border-radius:6px;transition:all .35s;display:inline-flex;align-items:center;gap:.5rem;position:relative;overflow:hidden}
+.btn-w::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(196,30,58,.15),transparent);transform:translateX(-100%);transition:transform .5s}
+.btn-w:hover::before{transform:translateX(100%)}
+.btn-w:hover{box-shadow:0 0 28px rgba(255,255,255,.35),0 0 60px rgba(255,184,77,.18);transform:translateY(-2px)}
+.hero-about-card{flex-shrink:0;width:100%;max-width:470px;padding:1.6rem 1.7rem;background:rgba(15,8,32,.6);backdrop-filter:blur(16px);border:1px solid rgba(255,184,77,.2);border-radius:20px;max-height:60vh;overflow-y:auto;text-align:left;animation:fadeSlideUp 1s .7s both}
+/* Hero VYREX heading (red glowing X) + second stat card */
+.hero-title{font-family:var(--ft);font-weight:900;font-size:clamp(3.4rem,8vw,6rem);line-height:.9;letter-spacing:.08em;margin-bottom:1.1rem;color:var(--cream);animation:fadeSlideUp 1s .5s both}
+.hero-title .hero-x,.hero-x{color:#C41E3A;-webkit-text-fill-color:#C41E3A;text-shadow:0 0 8px #C41E3A,0 0 16px rgba(196,30,58,.5)}
+.hero-stat-card{flex-shrink:0;width:100%;max-width:470px;display:flex;align-items:center;gap:1rem;padding:1.1rem 1.3rem;background:rgba(15,8,32,.6);backdrop-filter:blur(16px);border:1px solid rgba(255,184,77,.2);border-radius:20px;animation:fadeSlideUp 1s .9s both}
+.hsc-box{flex:1;display:flex;align-items:center;gap:.75rem}
+.hsc-div{width:1px;align-self:stretch;background:linear-gradient(to bottom,transparent,rgba(255,184,77,.25),transparent)}
+.hsc-ico{font-size:1.4rem;color:var(--gold);filter:drop-shadow(0 0 8px rgba(255,184,77,.3))}
+.hsc-n{font-family:var(--ft);font-size:1.25rem;font-weight:700;color:var(--cream);line-height:1}
+.hsc-l{font-family:var(--fa);font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(232,230,240,.5);margin-top:.2rem}
+.hero-about-card::-webkit-scrollbar{width:4px}.hero-about-card::-webkit-scrollbar-thumb{background:rgba(255,184,77,.25);border-radius:2px}
+.hac-head{display:flex;align-items:center;gap:.9rem;margin-bottom:1.1rem}
+.hac-gif{width:60px;height:60px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,184,77,.35);box-shadow:0 0 18px rgba(255,184,77,.25);flex-shrink:0}
+.hac-title{font-family:var(--ft);font-size:1.15rem;font-weight:700;line-height:1.1}
+.hac-sub{font-family:var(--fa);font-size:.56rem;letter-spacing:.16em;color:var(--gold);text-transform:uppercase;opacity:.85}
+.hac-body p{font-size:.85rem;line-height:1.72;color:rgba(232,230,240,.55);margin-bottom:.75rem;font-weight:300}
+.hac-body p strong{color:var(--gold);font-weight:500}
+.hero-about-card .feat-list{margin-top:1.1rem;gap:.5rem}
+.hero-about-card .feat-item{font-size:.82rem}
+
+/* — Hero ambiance keyframes (dust + breathing + pulse) + Mirai video transition — */
+@keyframes heroBreathing{0%{transform:scale(1) translateX(0)}50%{transform:scale(1.06) translateX(-2%)}100%{transform:scale(1.12) translateX(2%)}}
+@keyframes heroDust{0%{transform:translateY(0) translateX(0);opacity:0}20%{opacity:.6}100%{transform:translateY(-100px) translateX(30px);opacity:0}}
+@keyframes softPulse{0%{opacity:.3}100%{opacity:.7}}
+.hero-dust span{position:absolute;background:rgba(255,184,77,.4);border-radius:50%;filter:blur(1px);animation:heroDust 8s ease-out infinite;pointer-events:none}
+#mirai-video{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:8000;display:none;background:#000;pointer-events:none}
+
+/* — Cloud-phone card image + availability + game-icon images — */
+.cp-card{padding-right:5.2rem}
+.cp-card .cp-chip{display:none}
+.cp-card-img{position:absolute;top:14px;right:14px;width:62px;height:46px;object-fit:contain;border-radius:5px;background:transparent;padding:0;margin:0}
+.badge-gp{font-family:var(--fa);font-size:.48rem;padding:.1rem .32rem;background:#22c55e;color:#fff;border-radius:3px;font-weight:700}
+.badge-vx{font-family:var(--fa);font-size:.48rem;padding:.1rem .32rem;background:var(--crimson);color:#fff;border-radius:3px;font-weight:700}
+.cp-avail{font-family:var(--fa);font-size:.5rem;letter-spacing:.1em;color:rgba(232,230,240,.55);text-transform:uppercase;display:inline-flex;align-items:center;gap:.35rem;margin-top:.45rem}
+.cp-avail .dot{width:5px;height:5px;border-radius:50%;background:#4de6b3;box-shadow:0 0 8px #4de6b3;flex-shrink:0}
+.cp-game-ico{overflow:hidden}
+.cp-game-ico img{width:100%;height:100%;object-fit:cover}
+.cp-buy-sum .stk{color:#4de6b3}
+
+/* — Robux icon image + single Order button — */
+.rbxi-img{width:16px;height:16px;border-radius:50%;flex-shrink:0;object-fit:cover}
+.rbx-order-btn{display:inline-flex;align-items:center;gap:.55rem;padding:.85rem 2.2rem;font-family:var(--fa);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:linear-gradient(135deg,var(--crimson),var(--blood));color:#fff;border:none;border-radius:6px;transition:all .35s}
+.rbx-order-btn:hover{box-shadow:var(--glow-c);transform:translateY(-2px)}
+
+/* — Partners: 6-box glass grid (1 GenPlay + 5 open slots), evenly filling the page + glass buttons — */
+.pg{grid-template-columns:1fr 1fr;max-width:none;grid-auto-rows:1fr}
+#page-partners .sec{display:flex;flex-direction:column;justify-content:center;min-height:calc(100vh - 64px)}
+#page-partners .pg{flex:1 1 auto}
+.pcard{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--border-g);position:relative;overflow:hidden}
+.plogo{background:rgba(255,255,255,.04)}
+.plogo img{width:100%;height:100%;object-fit:cover}
+.pbtns{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.2rem}
+.pbtn{display:inline-flex;align-items:center;gap:.45rem;font-family:var(--fa);font-size:.62rem;letter-spacing:.06em;padding:.5rem 1.1rem;border:1px solid rgba(255,184,77,.2);background:rgba(255,255,255,.03);color:var(--cream);border-radius:6px;backdrop-filter:blur(10px);transition:all .3s}
+.pbtn i{color:var(--gold)}
+.pbtn:hover{border-color:var(--gold);background:rgba(255,184,77,.08);box-shadow:var(--glow-g);transform:translateY(-2px)}
+
+/* — Team: glass empty state — */
+.team-empty{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--border-g)}
+
+/* — Services: 4-card grid — */
+.svc-grid{grid-template-columns:repeat(4,1fr)}
+
+/* ===== SERVICES PAGE LAYOUT (designed for a real full-screen browser; standard 1024/768/640 breakpoints) ===== */
+
+/* Main container — three INDEPENDENT blocks distributed with space-between so the title sits at the top
+   (just below the nav), the cards are centred in the middle, and the steps sit at the bottom. The `gap`
+   is the minimum separation, so on tall/stacked layouts the blocks stay nicely spaced and scroll. */
+#page-services .sec {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  min-height: calc(100vh - 64px);
+  padding: 12px 56px 28px;      /* minimal top padding — title sits just below the nav */
+  gap: 2rem;
+  max-width: 1320px;
+}
+
+/* Title row: label "What We Offer" stays LEFT (small/subtle); heading "Our Services" sits RIGHT,
+   large and prominent. margin:auto 0 ... gives the whole block its vertical centring. */
+#page-services .sec > .rv:first-child {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  gap: 32px;
+  margin: 0;                   /* title pinned to the top (no auto-centring); cards follow just below */
+}
+#page-services .sec > .rv:first-child .slbl {
+  margin-bottom: 0;
+  font-size: 13px;
+  letter-spacing: .35em;
+  padding-bottom: 6px;         /* nudges the small label onto the heading's baseline */
+}
+#page-services .sec > .rv:first-child .stitle {
+  margin-bottom: 0;
+  text-align: right;
+  font-size: clamp(2.6rem, 5vw, 4rem);
+  line-height: 1.05;
+}
+
+/* The grid that holds the 4 service cards — an INDEPENDENT block (no margin coupling; centred by the
+   parent's space-between distribution) */
+#page-services .svc-grid {
+  width: 100%;
+  gap: 1.5rem;
+  margin: 0;
+  flex: 0 0 auto;
+}
+
+/* Each service card — scaled up with premium padding */
+#page-services .svc {
+  padding: 2rem 2.2rem;
+  border-radius: 14px;
+}
+#page-services .svc-ico {
+  width: 54px;
+  height: 54px;
+  font-size: 25px;
+  margin-bottom: 22px;
+}
+#page-services .svc-num {
+  font-size: 54px;
+  top: 14px;
+  right: 22px;
+}
+#page-services .svc-t {
+  font-size: 1.1rem;
+  margin-bottom: 11px;
+}
+#page-services .svc-d {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+/* Steps — an INDEPENDENT block (no margin coupling; pushed to the bottom by the parent's space-between),
+   scaled up. */
+#page-services .steps-wrap {
+  margin: 0;
+  flex-shrink: 0;
+  gap: 24px;
+  width: 100%;
+  max-width: 960px;
+}
+#page-services .steps-wrap::before {
+  top: 29px;                   /* runs through the centre of the 58px circles */
+}
+#page-services .step-n {
+  width: 58px;
+  height: 58px;
+  font-size: 20px;
+  margin-bottom: 18px;
+}
+#page-services .step-t {
+  font-size: 17px;
+  margin-bottom: 8px;
+}
+#page-services .step-d {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* — Rotating site background: 5 BTB images + the Mirai video (behind every page). Each image gets a
+     unique slow drift + a mood-matched overlay; brightness is tuned so text stays readable like the hero. — */
+#site-bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;transition:opacity .6s ease}
+#site-bg .sb-img{position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat;filter:brightness(.5) contrast(1.05) saturate(1.05);will-change:transform}
+#site-bg .sb-ov{position:absolute;inset:0;animation:bgPulse 7s ease-in-out infinite alternate}
+#mirai-video.as-bg{z-index:0;display:block;opacity:1}
+@keyframes bgPulse{0%{opacity:.9}100%{opacity:1}}
+@keyframes heroDrift{0%{transform:scale(1) translateX(-.5%)}100%{transform:scale(1.06) translateX(.5%)}}
+@keyframes bgDrift1{0%{transform:scale(1) translateX(-.5%)}100%{transform:scale(1.06) translateX(.5%)}}
+@keyframes bgDrift2{0%{transform:scale(1.01) translateX(.5%)}100%{transform:scale(1.06) translateX(-.5%)}}
+@keyframes bgDrift3{0%{transform:scale(1) translateX(.3%)}100%{transform:scale(1.055) translateX(-.5%)}}
+@keyframes bgDrift4{0%{transform:scale(1.015) translateX(-.4%)}100%{transform:scale(1.06) translateX(.5%)}}
+@keyframes bgDrift5{0%{transform:scale(1) translateX(.4%)}100%{transform:scale(1.05) translateX(-.4%)}}
+
+/* ═══ MOBILE OPTIMIZATIONS (≤1024px) — desktop is untouched ═══ */
+@media(max-width:1024px){
+  /* 1) ONE static Mirai background on every page: hero-style slow-zoom + atmospheric overlay, brightness .7.
+        Forces the single image over whatever the rotating JS sets, and hides the Mirai video entirely. */
+  #site-bg{display:block!important;opacity:1!important}
+  #site-bg .sb-img,.hero-bg{
+    background:url('https://cdn.statically.io/gh/RedX29/VyreX@main/assets/background/Mirai-mobile-bg.jpg') center/cover no-repeat!important;
+    filter:brightness(.7) contrast(1.03) saturate(1.05)!important;
+    animation:heroDrift 14s ease-in-out infinite alternate!important;
+  }
+  #site-bg .sb-ov{
+    background:radial-gradient(ellipse 80% 80% at 50% 46%,transparent 30%,rgba(26,13,46,.42) 72%,rgba(5,4,8,.82) 100%),linear-gradient(180deg,rgba(5,4,8,.4),rgba(5,4,8,.62))!important;
+    box-shadow:inset 0 0 180px 40px rgba(5,4,8,.5),inset 0 0 70px 10px rgba(5,4,8,.28);
+    animation:none!important;
+  }
+  #mirai-video{display:none!important}
+
+  /* 3) Partners — size cards to their content (no viewport-fill squish) and shrink content so nothing clips */
+  #page-partners .sec{display:block;min-height:auto}
+  #page-partners .pg{grid-template-columns:1fr;grid-auto-rows:auto;flex:none;gap:1rem;margin-top:1.5rem}
+  .pcard{padding:1.2rem 1.3rem;gap:1rem}
+  .plogo,.empty-pl{width:48px;height:48px}
+  .pn{font-size:.92rem;margin-bottom:.2rem}
+  .pd{font-size:.78rem;margin-bottom:.6rem}
+  .pbtns{gap:.4rem}
+  .pbtn{padding:.45rem .8rem;font-size:.58rem}
+}
+
+/* — Order modal refine — */
+.om-box{box-shadow:0 30px 80px rgba(0,0,0,.6)}
+
+/* — Mobile rotate-to-landscape prompt — */
+#rotate-prompt{position:fixed;inset:0;z-index:9990;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;background:rgba(5,4,8,.92);backdrop-filter:blur(26px)}
+#rotate-prompt.show{display:flex}
+.rot-ico{font-size:3rem;color:var(--gold);margin-bottom:1.2rem;animation:rotSpin 2.6s ease-in-out infinite}
+@keyframes rotSpin{0%,100%{transform:rotate(-12deg)}50%{transform:rotate(78deg)}}
+.rot-t{font-family:var(--ft);font-size:1.05rem;font-weight:700;margin-bottom:.6rem;max-width:340px;line-height:1.45}
+.rot-d{font-size:.82rem;color:rgba(232,230,240,.5);max-width:320px;line-height:1.6;margin-bottom:1.6rem}
+.rot-btn{font-family:var(--fa);font-size:.64rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.8rem 1.8rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,184,77,.25);color:var(--cream);border-radius:8px;backdrop-filter:blur(14px);transition:all .3s}
+.rot-btn:hover{border-color:var(--gold);background:rgba(255,184,77,.1);box-shadow:var(--glow-g)}
+
+/* — Apply: ensure glass on form wrappers — */
+.fw{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--border-g)}
+
+/* — Content fade-in (live per-element reveal also handled by the existing .rv/.vis system) — */
+.page-content .fade-item{opacity:0;transform:translateY(8px);transition:opacity .4s ease,transform .4s ease}
+.page-content.active .fade-item{opacity:1;transform:translateY(0)}
+
+/* — Theme toggle button + Light mode — */
+.nav-theme-btn{font-family:var(--fa);font-size:.82rem;width:34px;height:30px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,184,77,.2);color:var(--gold);background:rgba(255,184,77,.04);border-radius:4px;transition:all .25s}
+.nav-theme-btn:hover{background:rgba(255,184,77,.1);border-color:rgba(255,184,77,.4)}
+.nav-soc{display:flex;align-items:center;justify-content:center;width:30px;height:30px;flex-shrink:0;border-radius:50%;font-size:.72rem;color:rgba(232,230,240,.7);border:1px solid rgba(255,184,77,.15);background:rgba(255,255,255,.03);backdrop-filter:blur(6px);text-decoration:none;transition:transform .25s,box-shadow .25s,background .25s,color .25s,border-color .25s}
+.nav-soc i{display:flex;align-items:center;justify-content:center;line-height:1}
+.nav-soc:hover{transform:translateY(-2px) scale(1.08);color:#fff}
+.nav-soc.dc:hover{background:#5865F2;border-color:#5865F2;box-shadow:0 0 14px rgba(88,101,242,.7)}
+.nav-soc.fb:hover{background:#1877F2;border-color:#1877F2;box-shadow:0 0 14px rgba(24,119,242,.7)}
+body.light{--cream:#1A0D2E;--light:#2D1B4E;--bg:#F5F1FF;--bg2:#ECE7FA;--bg3:#E4DEF5;--glass:rgba(255,255,255,.62);--glass2:rgba(255,255,255,.8);--border:rgba(0,0,0,.1);--border-g:rgba(0,0,0,.12);background:#F5F1FF;color:#1A0D2E}
+body.light nav::before{background:linear-gradient(to bottom,rgba(245,241,255,.92),transparent);border-bottom-color:rgba(0,0,0,.08)}
+body.light nav.scrolled::before{background:rgba(245,241,255,.96)}
+body.light .glass-card,body.light .hero-about-card,body.light .hero-stat-card,body.light .pcard,body.light .team-empty,body.light .fw,body.light .om-box,body.light .svc{background:rgba(255,255,255,.62);border-color:rgba(0,0,0,.1)}
+body.light .hero-desc,body.light .hac-body p,body.light .svc-d,body.light .feat-item,body.light .step-d,body.light .cp-intro,body.light .hsc-l,body.light .hst-l,body.light .nav-links a,body.light .cp-lbl,body.light .rbx-cell,body.light .arole,body.light .h-pre{color:#43365c}
+body.light .nav-links a:hover,body.light .nav-links a.anav,body.light .hsc-n,body.light .hac-title,body.light .stitle,body.light .svc-t,body.light .step-t,body.light .pname{color:#1A0D2E}
+body.light .feat-item i,body.light .slbl,body.light .hac-sub,body.light .svc-ico,body.light .nav-curr-btn,body.light .nav-theme-btn{color:var(--gold)}
+body.light .btn-w{box-shadow:0 0 0 1px rgba(0,0,0,.08)}
+
+@media(max-width:1024px){
+  .svc-grid{grid-template-columns:repeat(2,1fr)}
+  .hero-about-card{max-width:100%;max-height:none}
+  .hero-left{order:1}.hero-right{order:2;height:auto}
+  .pg{max-width:100%}
+  /* tablet landscape: 2x2 cards; title top / cards middle / steps bottom still via space-between */
+  #page-services .sec{padding:12px 40px 28px}
+  #page-services .svc-grid{max-width:720px;gap:24px}
+  #page-services .steps-wrap{max-width:640px}
+}
+@media(max-width:768px){
+  /* tablet portrait: keep 2 columns, cards stay large (base padding) */
+  #page-services .sec{padding:12px 30px 28px}
+  #page-services .sec > .rv:first-child .stitle{font-size:clamp(2.2rem,6vw,3rem)}
+  #page-services .svc-grid{max-width:600px;gap:22px}
+  #page-services .steps-wrap{max-width:560px}
+}
+@media(max-width:640px){
+  /* phones: single column, title stacks (label over heading, both left-aligned) */
+  .svc-grid{grid-template-columns:1fr}
+  #page-services .sec{padding:12px 20px 24px}
+  #page-services .sec > .rv:first-child{flex-direction:column;align-items:flex-start;gap:12px;margin:0}
+  #page-services .sec > .rv:first-child .slbl{padding-bottom:0}
+  #page-services .sec > .rv:first-child .stitle{text-align:left;font-size:clamp(2rem,8vw,2.6rem)}
+  #page-services .svc-grid{max-width:440px;gap:18px}
+  #page-services .steps-wrap{max-width:420px}
+}
+/* (reduced-motion is handled in the earlier block; the Mirai video transition stays available) */
+
+/* — Robux: selectable rows (radio style) + gift rate — */
+.rbx-row{cursor:pointer;position:relative}
+.rbx-row.sel{background:rgba(255,184,77,.1)!important;box-shadow:inset 3px 0 0 var(--gold)}
+.rbx-row.sel .rbx-cell.rb{color:var(--gold)}
+.rbx-gift-rate{font-family:var(--ft);font-size:1rem;font-weight:700;color:var(--gold);text-shadow:var(--glow-g);line-height:1.35}
+body.light .rbx-row.sel{background:rgba(196,30,58,.08)!important}
+
+/* — Period cards: GenPlay strike price + final VyreX price (-5%) — */
+.cp-p-vx{font-family:var(--fa);font-size:.6rem;color:rgba(232,230,240,.4);margin-bottom:.18rem;display:flex;align-items:center;gap:.3rem;flex-wrap:wrap}
+.cp-p-vx .vx-strike{text-decoration:line-through;opacity:.75}
+.cp-p-lbl .badge-disc{margin-left:.15rem}
+body.light .cp-p-vx{color:#43365c}
+
+</style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
+<!-- Particles -->
+<div id="tsparticles"></div>
+
+<!-- Bokeh Depth Layer -->
+<div class="bokeh-layer" id="bokeh-layer"></div>
+
+<!-- Transition layer (Mirai video) -->
+<video id="mirai-video" muted playsinline preload="auto" aria-hidden="true">
+  <source src="https://files.catbox.moe/c7sljh.mp4" type="video/mp4">
+</video>
+
+<!-- Rotating site background (5 BTB images + Mirai video), shown behind every page -->
+<div id="site-bg" aria-hidden="true"><div class="sb-img" id="sb-img"></div><div class="sb-ov" id="sb-ov"></div></div>
+
+<!-- Mobile rotate-to-landscape prompt -->
+<div id="rotate-prompt" role="dialog" aria-modal="true" aria-label="Rotate device">
+  <div class="rot-ico"><i class="fas fa-mobile-screen-button"></i></div>
+  <h2 class="rot-t">For the optimal experience, please enable desktop mode in your browser settings and rotate your device to landscape.</h2>
+  <p class="rot-d">This is optional. You may dismiss it by tapping "CONTINUE ANYWAY"</p>
+  <button class="rot-btn" id="rot-continue">Continue anyway</button>
+</div>
+
+<!-- Notification -->
+<div id="notif"></div>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <a class="nav-logo" onclick="goPage('home',0)">
+    <span class="logo-main">VYRE<span class="x">X</span></span>
+    <span class="ja">ヴァイレックス</span>
+  </a>
+  <ul class="nav-links" id="nav-links-el">
+    <li><a onclick="goPage('home',0)" data-p="home">Home</a></li>
+    <li><a onclick="goPage('services',1)" data-p="services">Services</a></li>
+    <li><a onclick="goPage('buy',2)" data-p="buy">Buy</a></li>
+    <li><a onclick="goPage('partners',3)" data-p="partners">Partners</a></li>
+    <li><a onclick="goPage('team',4)" data-p="team">Team</a></li>
+    <li><a onclick="goPage('apply',5)" data-p="apply">Apply</a></li>
+  </ul>
+  <div class="nav-right">
+    <a class="nav-soc dc" href="https://discord.gg/jtQT43pjsz" target="_blank" rel="noopener" aria-label="Join our Discord"><i class="fab fa-discord"></i></a>
+    <a class="nav-soc fb" href="https://www.facebook.com/profile.php?id=61590158335637" target="_blank" rel="noopener" aria-label="Visit our Facebook"><i class="fab fa-facebook-f"></i></a>
+    <button class="nav-theme-btn" id="nav-theme" onclick="toggleTheme()" aria-label="Toggle light or dark mode"><i class="fas fa-moon"></i></button>
+    <button class="nav-curr-btn" id="nav-curr" onclick="toggleCurr()"><div class="curr-dot"></div><span id="nav-curr-txt">Detecting...</span></button>
+    <button class="hamburger" id="hamburger" onclick="toggleMobile()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ═══ CURRENCY PANEL ═══ -->
+<div id="curr-panel">
+  <div class="cp-inner">
+    <div class="cp-title"><span>Select Currency</span><button class="cp-close" onclick="toggleCurr()">&#10005; CLOSE</button></div>
+    <input type="text" class="cp-search" id="cp-search" placeholder="Search country or currency..." oninput="buildCurrList(this.value)">
+    <div class="cp-list" id="cp-list"></div>
+  </div>
+</div>
+
+<!-- ═══ ORDER MODAL ═══ -->
+<div id="om">
+  <div class="om-box iri">
+    <button class="om-close" onclick="closeOM()">&#10005; CLOSE</button>
+    <p class="om-tag">// Place Your Order</p>
+    <h2 class="om-title" id="om-title">Order Cloud Phone</h2>
+    <p class="om-cfg" id="om-cfg">&mdash;</p>
+    <div class="om-price" id="om-price">&mdash;</div>
+    <p class="om-sub">Choose your preferred platform. We respond fast &mdash; all payments via GCash, PayPal, or Binance.</p>
+    <div class="om-btns">
+      <a href="https://discord.gg/jtQT43pjsz" target="_blank" class="om-btn" onclick="sendOrder('Discord')"><div class="om-btn-ico"><i class="fab fa-discord"></i></div>Order via Discord</a>
+      <a href="https://www.facebook.com/profile.php?id=61590158335637" target="_blank" class="om-btn" onclick="sendOrder('Facebook')"><div class="om-btn-ico"><i class="fab fa-facebook-f"></i></div>Order via Facebook</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ VIEWPORT ═══════════ -->
+<div id="vp">
+
+<!-- ═══ HOME ═══ -->
+<div class="page pact" id="page-home">
+  <div class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-dust" aria-hidden="true">
+      <span style="left:6%;top:72%;width:7px;height:7px;animation-duration:9s;animation-delay:.4s"></span>
+      <span style="left:14%;top:88%;width:4px;height:4px;animation-duration:11s;animation-delay:1.8s"></span>
+      <span style="left:22%;top:64%;width:5px;height:5px;animation-duration:8s;animation-delay:.9s"></span>
+      <span style="left:33%;top:92%;width:8px;height:8px;animation-duration:12s;animation-delay:2.6s"></span>
+      <span style="left:41%;top:76%;width:4px;height:4px;animation-duration:10s;animation-delay:1.2s"></span>
+      <span style="left:52%;top:84%;width:6px;height:6px;animation-duration:9.5s;animation-delay:.2s"></span>
+      <span style="left:63%;top:68%;width:5px;height:5px;animation-duration:11.5s;animation-delay:3s"></span>
+      <span style="left:72%;top:90%;width:7px;height:7px;animation-duration:8.5s;animation-delay:1.5s"></span>
+      <span style="left:84%;top:74%;width:4px;height:4px;animation-duration:12.5s;animation-delay:2.1s"></span>
+      <span style="left:92%;top:82%;width:6px;height:6px;animation-duration:10.5s;animation-delay:.7s"></span>
+    </div>
+    <div class="hero-pulse" aria-hidden="true"></div>
+    <div class="hero-left">
+      <div class="hero-eyebrow"><div class="h-line"></div><span class="h-pre">OFFICIAL RESELLER NETWORK</span><div class="h-line" style="transform:scaleX(-1)"></div></div>
+      <h1 class="hero-title">VYRE<span class="hero-x">X</span></h1>
+      <p class="hero-desc">Trusted reseller for cloud phones and in-game currencies. Serving globally from the Philippines.</p>
+      <div class="hero-btns">
+        <a class="btn-w" href="#buy" onclick="goPage('buy',2);return false;"><i class="fas fa-shopping-cart"></i> Buy Now</a>
+        <a class="btn-o" href="#apply" onclick="goPage('apply',5);return false;"><i class="fas fa-handshake"></i> Become a Partner</a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="hst-n">100%</div><div class="hst-l">Trusted</div></div>
+        <div><div class="hst-n">24/7</div><div class="hst-l">Support</div></div>
+        <div><div class="hst-n">PH</div><div class="hst-l">Based</div></div>
+        <div><div class="hst-n">&#x1F30D;</div><div class="hst-l">Global</div></div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-about-card glass-card iri">
+        <div class="hac-head">
+          <img class="hac-gif" src="https://i.pinimg.com/originals/b5/b2/dc/b5b2dc4ebaf2c47ab012cf8614310b49.gif" alt="VyreX profile">
+          <div>
+            <h2 class="hac-title">About VyreX</h2>
+          </div>
+        </div>
+        <div class="hac-body">
+          <p>VyreX is a <strong>trusted seller</strong> specializing in discounted cloud phone subscriptions and in-game currencies like Robux. Best prices, trusted service, fast delivery.</p>
+          <p>We run an open <strong>reseller network</strong> &mdash; earn money by selling under VyreX with low upfront investment.</p>
+          <p>Payments via <strong>PayPal, GCash, and Binance</strong> &mdash; fast, secure, hassle-free for local and international clients.</p>
+          <div class="feat-list">
+            <div class="feat-item"><i class="fas fa-gem"></i> Verified by supplier &mdash; 100% legitimate stock</div>
+            <div class="feat-item"><i class="fas fa-tag"></i> Competitive pricing &mdash; always cheaper than retail</div>
+            <div class="feat-item"><i class="fas fa-users"></i> Active reseller network with open slots</div>
+            <div class="feat-item"><i class="fas fa-globe"></i> International clients &mdash; PayPal &amp; Binance accepted</div>
+            <div class="feat-item"><i class="fas fa-bolt"></i> Direct contact &mdash; no middlemen, no delays</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-stat-card glass-card iri">
+        <div class="hsc-box"><i class="fas fa-box hsc-ico"></i><div><div class="hsc-n">6+</div><div class="hsc-l">Products</div></div></div>
+        <div class="hsc-div"></div>
+        <div class="hsc-box"><i class="fas fa-handshake hsc-ico"></i><div><div class="hsc-n">1</div><div class="hsc-l">Partner</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SERVICES ═══ -->
+<div class="page pw" id="page-services">
+  <div class="sec">
+    <div class="rv"><p class="slbl">What We Offer</p><h2 class="stitle">Our <span class="acc">Services</span></h2></div>
+    <div class="svc-grid">
+      <div class="svc glass-card iri rv" style="transition-delay:.1s"><div class="svc-num">01</div><div class="svc-ico"><i class="fas fa-cloud"></i></div><h3 class="svc-t">Cloud Phones</h3><p class="svc-d">High-performance cloud phones with flexible specs. AFK, grind, multi-instance &mdash; all from the cloud.</p></div>
+      <div class="svc glass-card iri rv" style="transition-delay:.2s"><div class="svc-num">02</div><div class="svc-ico"><i class="fas fa-gamepad"></i></div><h3 class="svc-t">Robux Currency</h3><p class="svc-d">Covered and non-covered Robux at the best rates. Available via in-game gifting, via link/gamepass delivery. Bulk buyer gets a discount.</p></div>
+      <div class="svc glass-card iri rv" style="transition-delay:.3s"><div class="svc-num">03</div><div class="svc-ico"><i class="fas fa-network-wired"></i></div><h3 class="svc-t">Reseller Network</h3><p class="svc-d">Join VyreX as a reseller. Low capital, full support, brand partnership. Apply now &mdash; open slots available.</p></div>
+      <div class="svc glass-card iri rv" style="transition-delay:.4s"><div class="svc-num">04</div><div class="svc-ico"><i class="fas fa-handshake"></i></div><h3 class="svc-t">Partner</h3><p class="svc-d">Join our affiliate network and earn commissions. No upfront cost, dedicated support, and access to exclusive resources. Apply now.</p></div>
+    </div>
+    <div class="steps-wrap rv" style="transition-delay:.4s">
+      <div class="step"><div class="step-n">1</div><h4 class="step-t">Browse</h4><p class="step-d">Check prices &amp; products</p></div>
+      <div class="step"><div class="step-n">2</div><h4 class="step-t">Order</h4><p class="step-d">Via Discord or Facebook</p></div>
+      <div class="step"><div class="step-n">3</div><h4 class="step-t">Pay</h4><p class="step-d">GCash, PayPal, Binance</p></div>
+      <div class="step"><div class="step-n">4</div><h4 class="step-t">Receive</h4><p class="step-d">Fast delivery, guaranteed</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ BUY ═══ -->
+<div class="page pw" id="page-buy">
+  <div class="sec">
+    <div class="rv"><p class="slbl">Store</p><h2 class="stitle">Buy <span class="acc">Products</span></h2></div>
+    <div class="buy-tabs rv"><button class="buy-tab active" id="bit-cp" onclick="switchBuyTab('cp')"><i class="fas fa-cloud"></i> Cloud Phones</button><button class="buy-tab" id="bit-rbx" onclick="switchBuyTab('rbx')"><i class="fas fa-gamepad"></i> Robux</button></div>
+    <div class="buy-sec active" id="bs-cp">
+      <p class="cp-intro rv">Official GenPlay reseller. Enjoy <span style="color: var(--crimson);">5% off</span> GenPlay's prices &mdash; exclusively at VyreX.</p>
+      <div class="rv" style="transition-delay:.1s"><p class="cp-lbl">Select Model</p><div class="cp-models-grid" id="cp-models"></div></div>
+      <div class="rv" style="transition-delay:.15s">
+        <div class="cp-sel-row">
+          <div class="cp-sel-grp" id="grp-ram"><p class="cp-lbl">RAM</p><div class="cp-opts" id="cp-rams"></div></div>
+          <div class="cp-sel-grp" id="grp-storage"><p class="cp-lbl">Storage</p><div class="cp-opts" id="cp-storages"></div></div>
+          <div class="cp-sel-grp" id="grp-android"><p class="cp-lbl">Android Version</p><div class="cp-opts" id="cp-androids"></div></div>
+          <div class="cp-sel-grp" id="grp-games"><p class="cp-lbl">Recommended Games</p><div class="cp-games-row" id="cp-games"></div></div>
+        </div>
+      </div>
+      <div class="rv" style="transition-delay:.2s"><p class="cp-lbl">Select Duration</p><div class="cp-periods-grid" id="cp-periods"></div></div>
+      <div class="glass-card iri cp-buy-bar rv" style="transition-delay:.25s"><div><div class="cp-buy-sum" id="cp-buy-sum">&mdash;</div><div class="cp-buy-price" id="cp-buy-price">&mdash;</div></div><button class="btn-p" onclick="openOM('cp')"><i class="fas fa-shopping-cart"></i> Order Now</button></div>
+    </div>
+    <div class="buy-sec" id="bs-rbx">
+      <div class="rbx-tabs rv"><button class="rbx-tab active" id="tab-c" onclick="setTab('covered')">Tax Covered</button><button class="rbx-tab" id="tab-nc" onclick="setTab('noncovered')">Not Covered</button></div>
+      <div class="rbx-layout rv" style="transition-delay:.1s">
+        <div class="rbx-tbl glass-card"><div class="rbx-thead"><div class="rbx-th">Robux</div><div class="rbx-th">Price (Converted)</div><div class="rbx-th" id="rbx-ph">Price (PHP)</div></div><div id="rbx-rows"></div></div>
+        <div class="rbx-sb">
+          <div class="rsc glass-card iri"><div class="rbx-gift-rate" id="rbx-gift-rate">&mdash;</div></div>
+          <div class="rsc glass-card iri"><h4 class="rsc-t"><i class="fas fa-info-circle" style="color:var(--gold)"></i> How It Works</h4><div class="ri"><i class="fas fa-diamond"></i> Pick your Robux amount</div><div class="ri"><i class="fas fa-diamond"></i> Order via Discord or Facebook</div><div class="ri"><i class="fas fa-diamond"></i> Pay (GCash, PayPal, Binance)</div><div class="ri"><i class="fas fa-diamond"></i> Receive via gamepass method</div><div class="ri"><i class="fas fa-diamond"></i> Tax-covered = we pay the 30%</div></div>
+        </div>
+      </div>
+      <div class="rbx-order rv" style="transition-delay:.2s"><h3 class="rbx-order-t">Ready to Order?</h3><p class="rbx-order-d">Fast response &mdash; GCash, PayPal, Binance accepted</p>
+        <button class="rbx-order-btn" onclick="openOM('robux')"><i class="fas fa-shopping-cart"></i> Order Now</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PARTNERS ═══ -->
+<div class="page pw" id="page-partners">
+  <div class="sec">
+    <div class="rv"><p class="slbl">Partners</p><h2 class="stitle">Our <span class="acc">Partners</span></h2></div>
+    <div class="pg">
+<div class="pcard glass-card iri rv" style="transition-delay:.1s"><div class="plogo"><img src="https://play-lh.googleusercontent.com/sac5Sw6F2p6-_EX0fkU3wCaUqrKBUhIPCk07u0xUi3eU2sLjyJtJwNjeG5eS1HWIkY_gear1sZqJ0-cf0Yq01g=w240-h480-rw" alt="GenPlay logo"></div><div><h3 class="pn">GenPlay</h3><p class="pd">Official cloud phone supplier &mdash; high-performance Android cloud instances.</p><div class="pbtns"><a class="pbtn" href="https://genplay.io/" target="_blank"><i class="fas fa-globe"></i> Website</a><a class="pbtn" href="https://discord.gg/HRtt33bxQm" target="_blank"><i class="fab fa-discord"></i> Discord</a><a class="pbtn" href="https://play.google.com/store/apps/details?id=com.gen.play.io.cloud.phone&hl=en" target="_blank"><i class="fab fa-google-play"></i> Play Store</a></div></div></div>      <div class="pcard glass-card empty"><div class="empty-pl">+</div><div><h3 class="pn">Partner Slot</h3><p class="pd">Open for new partnerships.</p></div></div>
+      <div class="pcard glass-card empty"><div class="empty-pl">+</div><div><h3 class="pn">Partner Slot</h3><p class="pd">Open for new partnerships.</p></div></div>
+      <div class="pcard glass-card empty"><div class="empty-pl">+</div><div><h3 class="pn">Partner Slot</h3><p class="pd">Open for new partnerships.</p></div></div>
+      <div class="pcard glass-card empty"><div class="empty-pl">+</div><div><h3 class="pn">Partner Slot</h3><p class="pd">Open for new partnerships.</p></div></div>
+      <div class="pcard glass-card empty"><div class="empty-pl">+</div><div><h3 class="pn">Partner Slot</h3><p class="pd">Open for new partnerships.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TEAM ═══ -->
+<div class="page pw" id="page-team">
+  <div class="sec">
+    <div class="team-hr rv"><div><p class="slbl">Our Team</p><h2 class="stitle">VyreX <span class="acc">Resellers</span></h2></div><span class="tcnt">0 RESELLERS ACTIVE</span></div>
+    <div class="team-empty glass-card iri rv" style="transition-delay:.1s"><div class="te-ico"><i class="fas fa-user-plus"></i></div><h3 class="te-t">No Resellers Yet</h3><p class="te-s">Be the first to join the VyreX Reseller Network.</p></div>
+  </div>
+</div>
+
+<!-- ═══ APPLY ═══ -->
+<div class="page pw" id="page-apply">
+  <div class="sec">
+    <div class="rv"><p class="slbl">Join Us</p><h2 class="stitle">Apply to <span class="acc">VyreX</span></h2></div>
+    <div id="sv-partner" class="apply-sv">
+      <div class="partner-layout">
+        <div class="apply-info rv">
+          <p>Want to <strong>partner with VyreX</strong>? We're looking for content creators, community owners, businesses, and other reseller networks.</p>
+          <div class="anote"><p>We respond within <strong>24-48 hours</strong> via your Gmail. Make sure it's correct!</p></div>
+          <p>Partners get featured on our site, special pricing, co-marketing, and priority support.</p>
+          <div class="res-cta glass-card iri" onclick="switchView('reseller')">
+            <div class="res-cta-tag">LOOKING TO RESELL?</div>
+            <h3 class="res-cta-t">Join as a Reseller Instead</h3>
+            <p class="res-cta-d">Sell cloud phones &amp; Robux under VyreX. Low capital, full support.</p>
+            <span class="bc-btn"><i class="fas fa-arrow-right"></i> Switch to Reseller</span>
+          </div>
+        </div>
+        <div class="rv" style="transition-delay:.15s"><div class="fw glass-card iri">
+          <div id="pfc"><p class="fw-t">PARTNER APPLICATION</p><p class="fw-s">Tell us about yourself. We'll contact you via Gmail.</p>
+            <div class="fgrid">
+              <div class="fg"><label><span>Name / Brand</span><span class="req">*</span></label><input type="text" id="p-name" placeholder="e.g. YourBrand"></div>
+              <div class="fg"><label><span>Discord Username</span><span class="req">*</span></label><input type="text" id="p-discord" placeholder="e.g. yourdiscord"></div>
+              <div class="fg full"><label><span>Gmail Address</span><span class="req">*</span></label><input type="email" id="p-email" placeholder="your@gmail.com" oninput="valE('p-email','p-ee')"><span class="email-err" id="p-ee">Please enter a valid @gmail.com address</span></div>
+              <div class="fg full"><label><span>Type of Partnership</span><span class="req">*</span></label><select id="p-type"><option value="">Select type</option><option value="Content Creator">Content Creator</option><option value="Community Owner">Community Owner / Admin</option><option value="Business">Business / Brand</option><option value="Reseller Network">Reseller Network Owner</option><option value="Other">Other</option></select></div>
+              <div class="fg full"><label><span>What You Offer</span><span class="req">*</span></label><textarea id="p-offer" placeholder="Describe your offer or collaboration idea..."></textarea></div>
+              <div class="fg full"><label><span>Social / Links</span><span class="opt">OPTIONAL</span></label><input type="text" id="p-links" placeholder="Discord server, Facebook, website..."></div>
+              <div class="fg full"><label><span>File</span><span class="opt">OPTIONAL</span></label><input type="file" id="p-file"></div>
+            </div>
+            <button class="sub-btn" id="p-btn" onclick="submitForm('partner')"><span id="p-btxt">Submit Partner Application</span><div class="sub-spin" id="p-spin"></div></button>
+          </div>
+          <div class="form-ok" id="p-ok"><div class="fok-ico">&#10003;</div><h3 class="fok-t">Application Submitted!</h3><p class="fok-d">We'll review and contact you via Gmail within 24-48 hours.</p></div>
+        </div></div>
+      </div>
+    </div>
+    <div id="sv-reseller" class="apply-sv hidden">
+      <div class="reseller-layout">
+        <div class="res-info rv">
+          <a class="back-btn" onclick="switchView('partner')"><i class="fas fa-arrow-left"></i> Back to Partner Application</a>
+          <p>Want to <strong>join the VyreX Reseller Network</strong>? Sell cloud phones and Robux under our verified brand.</p>
+          <div class="anote"><p><strong>Requirements:</strong> Active social media, willingness to learn, small starting capital. We provide training.</p></div>
+          <p>Resellers earn margins on every sale with wholesale pricing, marketing materials, and support.</p>
+        </div>
+        <div class="rv" style="transition-delay:.15s"><div class="fw glass-card iri">
+          <div id="rfc"><p class="fw-t">RESELLER APPLICATION</p><p class="fw-s">Tell us about yourself. We'll contact you via Gmail.</p>
+            <div class="fgrid">
+              <div class="fg"><label><span>Name</span><span class="req">*</span></label><input type="text" id="r-name" placeholder="e.g. Your Name"></div>
+              <div class="fg"><label><span>Discord Username</span><span class="req">*</span></label><input type="text" id="r-discord" placeholder="e.g. yourdiscord"></div>
+              <div class="fg full"><label><span>Gmail Address</span><span class="req">*</span></label><input type="email" id="r-email" placeholder="your@gmail.com" oninput="valE('r-email','r-ee')"><span class="email-err" id="r-ee">Please enter a valid @gmail.com address</span></div>
+              <div class="fg full"><label><span>Selling Platform</span><span class="req">*</span></label><select id="r-platform"><option value="">Select platform</option><option value="Facebook">Facebook</option><option value="Discord">Discord</option><option value="Shopee">Shopee</option><option value="TikTok">TikTok</option><option value="Other">Other</option></select></div>
+              <div class="fg full"><label><span>Experience / Proof</span><span class="opt">OPTIONAL</span></label><textarea id="r-proof" placeholder="Any selling experience? Links..."></textarea></div>
+              <div class="fg full"><label><span>File</span><span class="opt">OPTIONAL</span></label><input type="file" id="r-file"></div>
+            </div>
+            <button class="sub-btn" id="r-btn" onclick="submitForm('reseller')"><span id="r-btxt">Submit Reseller Application</span><div class="sub-spin" id="r-spin"></div></button>
+          </div>
+          <div class="form-ok" id="r-ok"><div class="fok-ico">&#10003;</div><h3 class="fok-t">Application Submitted!</h3><p class="fok-d">We'll review and contact you via Gmail within 24-48 hours.</p></div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /vp -->
+
+<script>
+// ════════════ DATA ════════════
+var COUNTRIES=[{n:"Philippines",f:"\u{1F1F5}\u{1F1ED}",c:"PH",cur:"PHP",s:"₱",r:1},{n:"United States",f:"\u{1F1FA}\u{1F1F8}",c:"US",cur:"USD",s:"$",r:0.01786},{n:"United Kingdom",f:"\u{1F1EC}\u{1F1E7}",c:"GB",cur:"GBP",s:"£",r:0.014},{n:"European Union",f:"\u{1F1EA}\u{1F1FA}",c:"EU",cur:"EUR",s:"€",r:0.0163},{n:"Australia",f:"\u{1F1E6}\u{1F1FA}",c:"AU",cur:"AUD",s:"A$",r:0.0274},{n:"Canada",f:"\u{1F1E8}\u{1F1E6}",c:"CA",cur:"CAD",s:"CA$",r:0.0243},{n:"Singapore",f:"\u{1F1F8}\u{1F1EC}",c:"SG",cur:"SGD",s:"S$",r:0.0239},{n:"Malaysia",f:"\u{1F1F2}\u{1F1FE}",c:"MY",cur:"MYR",s:"RM",r:0.083},{n:"Indonesia",f:"\u{1F1EE}\u{1F1E9}",c:"ID",cur:"IDR",s:"Rp",r:280},{n:"Japan",f:"\u{1F1EF}\u{1F1F5}",c:"JP",cur:"JPY",s:"¥",r:2.65},{n:"South Korea",f:"\u{1F1F0}\u{1F1F7}",c:"KR",cur:"KRW",s:"₩",r:23.8},{n:"Thailand",f:"\u{1F1F9}\u{1F1ED}",c:"TH",cur:"THB",s:"฿",r:0.647},{n:"Vietnam",f:"\u{1F1FB}\u{1F1F3}",c:"VN",cur:"VND",s:"₫",r:441},{n:"Brazil",f:"\u{1F1E7}\u{1F1F7}",c:"BR",cur:"BRL",s:"R$",r:0.0986},{n:"Mexico",f:"\u{1F1F2}\u{1F1FD}",c:"MX",cur:"MXN",s:"$",r:0.357},{n:"India",f:"\u{1F1EE}\u{1F1F3}",c:"IN",cur:"INR",s:"₹",r:1.505},{n:"UAE",f:"\u{1F1E6}\u{1F1EA}",c:"AE",cur:"AED",s:"AED",r:0.0655},{n:"Saudi Arabia",f:"\u{1F1F8}\u{1F1E6}",c:"SA",cur:"SAR",s:"SAR",r:0.0669},{n:"Hong Kong",f:"\u{1F1ED}\u{1F1F0}",c:"HK",cur:"HKD",s:"HK$",r:0.139},{n:"Taiwan",f:"\u{1F1F9}\u{1F1FC}",c:"TW",cur:"TWD",s:"NT$",r:0.575},{n:"New Zealand",f:"\u{1F1F3}\u{1F1FF}",c:"NZ",cur:"NZD",s:"NZ$",r:0.0296},{n:"Other",f:"\u{1F30D}",c:"XX",cur:"USD",s:"$",r:0.01786}];
+var USD_RATE=(function(){var u=COUNTRIES.find(function(c){return c.cur==="USD";});return u?u.r:0.01786;})();
+function baseFromUSD(u){return u/USD_RATE;} // exact USD price -> PHP base so conv() converts correctly to any currency
+var PERIODS=[{l:"1 Day",d:1},{l:"7 Days",d:7},{l:"15 Days",d:15},{l:"30 Days",d:30},{l:"90 Days",d:90},{l:"180 Days",d:180},{l:"360 Days",d:360}];
+var GAME_ICONS={
+  "MIR4":"https://static.genplay.io/images/2026/04/f1fdd775c1e135b46fe83e68bdf42556.png",
+  "Night Crows":"https://static.genplay.io/images/2026/04/5851f19d24d02984e86cfb3f83c3cb5d.png",
+  "Roblox":"https://static.genplay.io/images/2026/04/a7f0dc675c8c19f3a0896494314510b7.png",
+  "ROM":"https://static.genplay.io/images/2026/04/e8d0aff8bace247c702032ec6e19b860.png",
+  "Next Generation":"https://static.genplay.io/images/2026/04/2188e2818e06864b618e900224c99035.png",
+  "Free Fire":"https://sf-static.upanhlaylink.com/img/image_20260404df8c909e075d4a28f900b843e5b73cab.jpg",
+  "Play Together":"https://sf-static.upanhlaylink.com/img/image_20260404341aa27ddb0ef93476db641b480ed124.jpg",
+  "Lineage":"https://sf-static.upanhlaylink.com/img/image_20260404df1d50f448f290c797751e156dccbfeb.jpg",
+  "Raven":"https://static.genplay.io/images/2026/04/46b0444fb2c4e015bce6b0a57152534e.png",
+  "AOV":"https://static.genplay.io/images/2026/04/6ee026b411b084ce81afa148fd00d5f5.png"
+};
+// Each model holds variants keyed by RAM / storage / android, each with exact USD prices (7 durations), availability and game list.
+var CP_MODELS=[
+  {id:"sd855",name:"Snapdragon 855",desc:"Better CPU, smooth high-FPS gaming",cpu:"Better",cpuC:"cpu-bet",chip:"855",grad:"cp-purple",img:"https://static.genplay.io/images/2026/04/f198984f0ebcab6a7ffcd2c18cac0b21.jpg",variants:[
+    {ram:6,storage:64,android:"15",avail:68,usd:[1.2654,2.4204,5.1865,8.2962,30.7731,53.2385,96.7846],games:["MIR4","Night Crows","Roblox","ROM","Next Generation","Free Fire","Play Together"]}
+  ]},
+  {id:"exynos",name:"Exynos 8895",desc:"Balanced value, smooth AFK",cpu:"Balanced",cpuC:"cpu-bal",chip:"EX",grad:"cp-teal",img:"https://static.genplay.io/images/2026/04/584982423326b9896ea88c54f08c6f36.jpg",variants:[
+    {ram:6,storage:64,android:"12",avail:4,usd:[0.9227,2.4204,5.1865,8.2962,20.3885,33.8538,66.3231],games:["MIR4","Night Crows","Roblox","ROM","Next Generation"]}
+  ]},
+  {id:"sd835",name:"Snapdragon 835",desc:"Balanced value, multi-instance ready",cpu:"Balanced",cpuC:"cpu-bal",chip:"835",grad:"cp-blue",img:"https://static.genplay.io/images/2026/04/93d81f74d7897e67bf0c5d0f851c89c9.png",variants:[
+    {ram:6,storage:64,android:"10",avail:122,usd:[0.9227,2.4204,5.1865,8.2962,20.3885,33.8538,66.3231],games:["MIR4","Night Crows","Roblox","ROM","Next Generation"]},
+    {ram:6,storage:64,android:"15",avail:124,usd:[0.9227,2.4204,5.1865,8.2962,20.3885,33.8538,66.3231],games:["MIR4","Night Crows","Roblox","ROM","Next Generation"]},
+    {ram:8,storage:128,android:"10",avail:37,usd:[0.9227,2.4204,5.1865,8.2962,20.3885,33.8538,66.3231],games:["MIR4","Night Crows","Roblox","ROM","Next Generation","Free Fire","Play Together"]},
+    {ram:8,storage:64,android:"15",avail:15,usd:[0.9227,2.4204,5.1865,8.2962,20.3885,33.8538,66.3231],games:["MIR4","Night Crows","Roblox","ROM","Next Generation"]}
+  ]},
+  {id:"sd865",name:"Snapdragon 865",desc:"Ultra-fast, ultimate gaming",cpu:"Ultra-fast",cpuC:"cpu-uf",chip:"865",grad:"cp-cyan",img:"https://static.genplay.io/images/2026/04/0a1e4f843adf07bfecac3d50f9453a19.png",variants:[
+    {ram:8,storage:128,android:"12",avail:6,usd:[1.5342,4.0358,8.6481,13.7077,33.8885,56.70,110.6308],games:["MIR4","Night Crows","Roblox","ROM","Next Generation","Lineage","Raven","AOV","Free Fire","Play Together"]}
+  ]},
+  {id:"sd845",name:"Snapdragon 845",desc:"High CPU, reliable performance",cpu:"High",cpuC:"cpu-bet",chip:"845",grad:"cp-green",img:"https://static.genplay.io/images/2026/06/5286676b4b436adb768c0ac155a6229a.jpg",variants:[
+    {ram:6,storage:128,android:"15",avail:88,usd:[1.0765,2.6088,5.5904,9.2192,24.1962,40.0846,78.7846],games:["Roblox","Free Fire","Play Together"]},
+    {ram:6,storage:64,android:"15",avail:11,usd:[1.0765,2.6088,5.5904,9.2192,24.1962,40.0846,78.7846],games:["Roblox","Free Fire","Play Together"]}
+  ]}
+];
+var RBX_COV=[{r:100,p:50},{r:200,p:95},{r:300,p:135},{r:400,p:165},{r:500,p:200},{r:600,p:230},{r:700,p:260},{r:800,p:300},{r:900,p:335},{r:1000,p:365}];
+var RBX_NC=[{r:100,p:40},{r:200,p:70},{r:300,p:100},{r:400,p:125},{r:500,p:150},{r:600,p:175},{r:700,p:200},{r:800,p:215},{r:900,p:235},{r:1000,p:265}];
+var PAGES=["home","services","buy","partners","team","apply"];
+var P_HOOK="https://discord.com/api/webhooks/1506856534133706805/jaVYwYn7kdho6VFqUQNsQAWf-2PY7eyTQ0esZVmcVek5GeFahpFdB9jSG6Z5gci_wKy7";
+var R_HOOK="https://discord.com/api/webhooks/1506170266127171636/D6kOnlsv9FZyBqI3Ym55S-2Xq49qfB75RU_P5pU6-LZfKEXoKMQNVtvsT--8f-CKXLn8";
+var O_HOOK="https://discord.com/api/webhooks/1515982482498130020/0jKJc0Ps3UPC_3ixKvzoaGegYoHxcopt9h5FqT5Uel59iXNl9UMlT5aPXmlM7nMFrGSS";
+
+// ════════════ STATE ════════════
+var cc=COUNTRIES.find(function(x){return x.cur==="USD";})||COUNTRIES[0],ctab="covered",curIdx=0,animating=false,svAnim=false;
+var cpModel=null,cpRam=null,cpStorage=null,cpAndroid=null,cpPeriod=3,currOpen=false,omMode="cp",curOrder=null,rbxSel=0;
+var EXTRA_OFF=0.95;   // your exclusive 5% off GenPlay's price (final = GenPlay * 0.95)
+// GenPlay's own discount per duration (used for the green -N% badge, when > 0)
+var GP_DISC={sd855:[0,40,40,40,0,0,0],exynos:[0,10,0,20,30,10,10],sd835:[0,10,0,20,30,10,10],sd865:[0,10,0,20,30,10,10],sd845:[0,20,20,20,0,0,0]};
+var VYREX_OFF=0.95;   // VyreX price is already 5% under GenPlay -> GenPlay = vyrex / VYREX_OFF
+var GIFT_RATE_PHP=0.32; // PHP per 1 Robux via in-game gifting
+
+// ════════════ CURRENCY ════════════
+function conv(p){var v=p*cc.r;if(v>=1000)return cc.s+Math.round(v).toLocaleString();if(v>=10)return cc.s+v.toFixed(2);if(v>=1)return cc.s+v.toFixed(2);return cc.s+v.toFixed(3);}
+function buildCurrList(q){var fil=COUNTRIES.filter(function(x){var s=(q||"").toLowerCase();return!s||x.n.toLowerCase().includes(s)||x.cur.toLowerCase().includes(s)||x.c.toLowerCase().includes(s);});var list=document.getElementById("cp-list");if(!list)return;list.innerHTML="";fil.forEach(function(x){var div=document.createElement("div");div.className="cp-item"+(x.c===cc.c?" active":"");div.innerHTML='<span class="flag">'+x.f+'</span><span class="cname">'+x.n+'</span><span class="ccur">'+x.cur+'</span>';div.addEventListener("click",function(){setCC(x.c);});list.appendChild(div);});}
+function setCC(code){cc=COUNTRIES.find(function(x){return x.c===code;})||COUNTRIES[0];document.getElementById("nav-curr-txt").textContent=cc.cur+" "+cc.f;renderRbx();if(cpModel)renderPeriods();buildCurrList(document.getElementById("cp-search").value);showNotif("\u{1F30D} "+cc.f+" "+cc.n+" — "+cc.cur,false);}
+function toggleCurr(){currOpen=!currOpen;document.getElementById("curr-panel").classList.toggle("open",currOpen);if(currOpen){buildCurrList("");setTimeout(function(){document.addEventListener("click",closeCurrOut,{once:true,capture:true});},120);}}
+function closeCurrOut(e){if(!document.getElementById("curr-panel").contains(e.target)&&!document.getElementById("nav-curr").contains(e.target)){currOpen=false;document.getElementById("curr-panel").classList.remove("open");}}
+function detectCountry(){var USD=COUNTRIES.find(function(x){return x.cur==="USD";})||COUNTRIES[0];cc=USD;document.getElementById("nav-curr-txt").textContent=cc.cur+" "+cc.f;function applyCode(code,cur){var found=COUNTRIES.find(function(x){return x.c===code;})||COUNTRIES.find(function(x){return x.cur===cur;})||USD;cc=found;document.getElementById("nav-curr-txt").textContent=cc.cur+" "+cc.f;renderRbx();if(cpModel)renderPeriods();buildCurrList("");}function sig(){try{return AbortSignal.timeout(5000);}catch(e){return undefined;}}if(location.protocol==="file:")return;try{fetch("https://ipapi.co/json/",{signal:sig()}).then(function(r){return r.json();}).then(function(d){applyCode(d.country_code||"",d.currency||"");}).catch(function(){try{fetch("https://ip-api.com/json/?fields=countryCode,currency",{signal:sig()}).then(function(r){return r.json();}).then(function(d){applyCode(d.countryCode||"",d.currency||"");}).catch(function(){/* CORS/network — keep USD default */});}catch(e){}});}catch(e){/* geolocation unavailable — keep USD default */}}
+
+// ════════════ ROBUX ════════════
+function renderRbx(){var d=ctab==="covered"?RBX_COV:RBX_NC;if(rbxSel>=d.length)rbxSel=0;var ph=document.getElementById("rbx-ph");if(ph)ph.textContent="Price ("+cc.cur+")";var rows=document.getElementById("rbx-rows");if(rows)rows.innerHTML=d.map(function(x,i){return'<div class="rbx-row'+(i===rbxSel?" sel":"")+'" data-rbx="'+i+'" role="radio" aria-checked="'+(i===rbxSel)+'" onclick="selRbx('+i+')"><div class="rbx-cell rb"><img class="rbxi-img" src="https://cdn.statically.io/gh/RedX29/VyreX@main/assets/Robux-Icon.png" alt="Robux">'+x.r.toLocaleString()+'</div><div class="rbx-cell pr">'+conv(x.p)+'</div><div class="rbx-cell ph">₱'+x.p+'</div></div>';}).join("");var gr=document.getElementById("rbx-gift-rate");if(gr)gr.textContent="\u{1F4B0} Gift rate: "+conv(GIFT_RATE_PHP)+" / 1 Robux";}
+function selRbx(i){rbxSel=i;renderRbx();}
+function setTab(t){ctab=t;document.getElementById("tab-c").classList.toggle("active",t==="covered");document.getElementById("tab-nc").classList.toggle("active",t==="noncovered");renderRbx();}
+function switchBuyTab(tab){document.querySelectorAll(".buy-tab").forEach(function(b){b.classList.remove("active");});document.querySelectorAll(".buy-sec").forEach(function(s){s.classList.remove("active");});document.getElementById("bit-"+tab).classList.add("active");document.getElementById("bs-"+tab).classList.add("active");}
+
+// ════════════ CLOUD PHONE ════════════
+function uniq(arr){var o=[],s={};arr.forEach(function(v){if(!s[v]){s[v]=1;o.push(v);}});return o;}
+function gameIcon(name){var u=GAME_ICONS[name];return'<div class="cp-game-ico" title="'+name+'">'+(u?'<img src="'+u+'" alt="'+name+'" loading="lazy">':name.substring(0,2))+'</div>';}
+function initCP(){var mc=document.getElementById("cp-models");if(!mc)return;mc.innerHTML=CP_MODELS.map(function(m){var rams=uniq(m.variants.map(function(x){return x.ram;})).join("/");var sts=uniq(m.variants.map(function(x){return x.storage;})).join("/");return'<div class="cp-card '+m.grad+' glass-card iri" data-mid="'+m.id+'" id="cpcard-'+m.id+'"><div class="cp-chip">'+m.chip+'</div><img class="cp-card-img" src="'+m.img+'" alt="'+m.name+'" loading="lazy"><div class="cp-card-name">'+m.name+'</div><div class="cp-card-desc">'+m.desc+'</div><div class="cp-card-specs"><div><div class="cp-sv">'+rams+'GB</div><div class="cp-sl">RAM</div></div><div><div class="cp-sv">'+sts+'G</div><div class="cp-sl">Storage</div></div><div><div class="cp-sv '+m.cpuC+'">'+m.cpu+'</div><div class="cp-sl">CPU</div></div></div></div>';}).join("");mc.querySelectorAll(".cp-card").forEach(function(card){card.addEventListener("click",function(){selectModel(this.dataset.mid);});});if(CP_MODELS.length>0)selectModel(CP_MODELS[0].id);}
+function selectModel(id){cpModel=CP_MODELS.find(function(m){return m.id===id;});if(!cpModel)return;document.querySelectorAll(".cp-card").forEach(function(c){c.classList.remove("sel");});var card=document.getElementById("cpcard-"+id);if(card)card.classList.add("sel");var v0=cpModel.variants[0];cpRam=v0.ram;cpStorage=v0.storage;cpAndroid=v0.android;renderSelectors();renderPeriods();}
+function getVariant(){if(!cpModel)return null;return cpModel.variants.find(function(v){return v.ram===cpRam&&v.storage===cpStorage&&String(v.android)===String(cpAndroid);})||null;}
+function renderSelectors(){if(!cpModel)return;var vs=cpModel.variants;
+  var rams=uniq(vs.map(function(v){return v.ram;}));
+  var storages=uniq(vs.filter(function(v){return v.ram===cpRam;}).map(function(v){return v.storage;}));if(storages.indexOf(cpStorage)<0)cpStorage=storages[0];
+  var androids=uniq(vs.filter(function(v){return v.ram===cpRam&&v.storage===cpStorage;}).map(function(v){return String(v.android);}));if(androids.indexOf(String(cpAndroid))<0)cpAndroid=androids[0];
+  var ramsEl=document.getElementById("cp-rams");ramsEl.innerHTML=rams.map(function(r){return'<div class="cp-opt'+(r===cpRam?" sel":"")+'" data-ram="'+r+'">'+r+'GB RAM</div>';}).join("");ramsEl.querySelectorAll(".cp-opt").forEach(function(el){el.addEventListener("click",function(){selRam(+this.dataset.ram);});});document.getElementById("grp-ram").style.display="flex";
+  var stEl=document.getElementById("cp-storages");stEl.innerHTML=storages.map(function(s){return'<div class="cp-opt'+(s===cpStorage?" sel":"")+'" data-st="'+s+'">'+s+'GB</div>';}).join("");stEl.querySelectorAll(".cp-opt").forEach(function(el){el.addEventListener("click",function(){selStorage(+this.dataset.st);});});document.getElementById("grp-storage").style.display=storages.length>1?"flex":"none";
+  var andEl=document.getElementById("cp-androids");andEl.innerHTML=androids.map(function(a){return'<div class="cp-opt'+(a===String(cpAndroid)?" sel":"")+'" data-and="'+a+'">Android '+a+'</div>';}).join("");andEl.querySelectorAll(".cp-opt").forEach(function(el){el.addEventListener("click",function(){selAnd(this.dataset.and);});});document.getElementById("grp-android").style.display=androids.length>1?"flex":"none";
+  var v=getVariant();document.getElementById("cp-games").innerHTML=(v?v.games:[]).map(function(g){return gameIcon(g);}).join("");}
+function selRam(r){cpRam=r;var st=uniq(cpModel.variants.filter(function(v){return v.ram===r;}).map(function(v){return v.storage;}));cpStorage=st[0];var an=uniq(cpModel.variants.filter(function(v){return v.ram===cpRam&&v.storage===cpStorage;}).map(function(v){return String(v.android);}));cpAndroid=an[0];renderSelectors();renderPeriods();}
+function selStorage(s){cpStorage=s;var an=uniq(cpModel.variants.filter(function(v){return v.ram===cpRam&&v.storage===cpStorage;}).map(function(v){return String(v.android);}));cpAndroid=an[0];renderSelectors();renderPeriods();}
+function selAnd(a){cpAndroid=a;renderSelectors();renderPeriods();}
+function renderPeriods(){var v=getVariant();if(!v)return;var disc=(GP_DISC[cpModel.id])||[0,0,0,0,0,0,0];document.getElementById("cp-periods").innerHTML=PERIODS.map(function(p,i){var gp=baseFromUSD(v.usd[i]);var fin=gp*EXTRA_OFF;var perDay=fin/p.d;var isSel=i===cpPeriod;var gpD=disc[i];return'<div class="cp-period glass-card'+(isSel?" sel":"")+'" onclick="selPeriod('+i+')"><div class="cp-p-lbl">'+p.l+(gpD>0?' <span class="badge-gp">-'+gpD+'%</span>':'')+' <span class="badge-vx">-5%</span></div><div class="cp-p-vx">GenPlay <span class="vx-strike">'+conv(gp)+'</span></div><div class="cp-p-price">'+conv(fin)+'</div><div class="cp-p-per">~ '+conv(perDay)+'/day</div></div>';}).join("");updateBuyBar();}
+function selPeriod(i){cpPeriod=i;renderPeriods();}
+function updateBuyBar(){var v=getVariant();if(!v)return;var vyrex=baseFromUSD(v.usd[cpPeriod]);var fin=vyrex*EXTRA_OFF;var period=PERIODS[cpPeriod];var s=document.getElementById("cp-buy-sum");var pr=document.getElementById("cp-buy-price");if(s)s.innerHTML='<strong>'+cpModel.name+'</strong> · '+v.ram+'GB · '+v.storage+'GB · Android '+v.android+' · '+period.l+' · <span class="stk">\u{1F525} extra -5%</span>';if(pr)pr.textContent=conv(fin);}
+function openOM(mode){omMode=mode||"cp";var titleEl=document.getElementById("om-title");if(omMode==="robux"){var d=ctab==="covered"?RBX_COV:RBX_NC;var sel=d[rbxSel]||d[0];var taxLabel=ctab==="covered"?"Tax Covered":"Not Covered";curOrder={type:"robux",amount:sel.r,php:sel.p,price:conv(sel.p),tax:taxLabel};titleEl.textContent="Order Robux";document.getElementById("om-cfg").textContent=sel.r.toLocaleString()+" Robux | "+taxLabel+" | ₱"+sel.p;document.getElementById("om-price").textContent=conv(sel.p);document.getElementById("om").classList.add("open");return;}var v=getVariant();if(!v){showNotif("⚠ Please select a model first.",true);return;}var vyrex=baseFromUSD(v.usd[cpPeriod]);var fin=vyrex*EXTRA_OFF;var period=PERIODS[cpPeriod];curOrder={type:"cp",model:cpModel.name,ram:v.ram,storage:v.storage,android:v.android,duration:period.l,price:conv(fin)};titleEl.textContent="Order Cloud Phone";document.getElementById("om-cfg").textContent=cpModel.name+" | "+v.ram+"GB RAM | "+v.storage+"GB | Android "+v.android+" | "+period.l+" | \u{1F525} extra -5% applied";document.getElementById("om-price").textContent=conv(fin);document.getElementById("om").classList.add("open");}
+function closeOM(){document.getElementById("om").classList.remove("open");}
+function sendOrder(platform){var o=curOrder;if(!o)return;var payload;if(o.type==="robux"){payload={username:"VyreX Orders",embeds:[{title:"Order Robux",description:"**Robux order**\n"+o.amount.toLocaleString()+" Robux ("+o.tax+")\n"+o.price+"\n(Clicked via "+platform+")",color:0xe8000d,fields:[{name:"Product",value:"Roblox Robux",inline:true},{name:"Amount",value:o.amount.toLocaleString()+" Robux",inline:true},{name:"Type",value:o.tax,inline:true},{name:"Price",value:o.price+" (₱"+o.php+")",inline:true},{name:"Platform",value:platform,inline:true}],footer:{text:"VyreX Order System"},timestamp:new Date().toISOString()}]};}else{payload={username:"VyreX Orders",embeds:[{title:"Order GenPlay Cloud Phone",description:o.model+" | "+o.ram+"GB RAM | Android "+o.android+" | "+o.duration+"\n"+o.price+"\n(Clicked via "+platform+")",color:0xe8000d,fields:[{name:"Model",value:o.model,inline:true},{name:"RAM",value:o.ram+"GB",inline:true},{name:"Storage",value:o.storage+"GB",inline:true},{name:"Android",value:"Android "+o.android,inline:true},{name:"Duration",value:o.duration,inline:true},{name:"Price",value:o.price,inline:true},{name:"Platform",value:platform,inline:true}],footer:{text:"VyreX Order System"},timestamp:new Date().toISOString()}]};}try{fetch(O_HOOK,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)}).catch(function(){});}catch(e){}}
+document.getElementById("om").addEventListener("click",function(e){if(e.target===this)closeOM();});
+
+// ════════════ PAGE TRANSITIONS (Mirai video) ════════════
+
+// Smoothly fade a page in (opacity 0->1, translateY 5px->0, optional scale 0.9->1).
+function revealPage(from,to,scaleIn,cb,dur){
+  dur=dur||0.4; // fade-in duration in seconds (0.4 default; Mirai video reveal uses 0.3)
+  if(from){from.classList.remove("pact");from.style.cssText="";}
+  to.scrollTop=0;to.classList.add("pact");
+  to.querySelectorAll(".rv").forEach(function(e){e.classList.remove("vis");});
+  to.style.cssText="opacity:0;transform:"+(scaleIn?"scale(.9) ":"")+"translateY(5px);transition:opacity "+dur+"s ease,transform "+dur+"s ease";
+  requestAnimationFrame(function(){requestAnimationFrame(function(){to.style.opacity="1";to.style.transform="translateY(0)";});});
+  setTimeout(function(){to.style.cssText="";to.querySelectorAll(".rv").forEach(function(e){e.classList.add("vis");});if(cb)cb();},dur*1000+30);
+}
+function endTransition(){animating=false;}
+
+// ════════════ ROTATING BACKGROUND (5 static images + Mirai video) ════════════
+// On each navigation a background is rolled for the destination page: 10% the Mirai video (shown as a
+// paused thumbnail until you leave, then it plays the cinematic transition), 90% one of 5 BTB images
+// (each with a unique slow drift + a mood-matched, readability-preserving overlay).
+var BG_IMAGES=[
+  "https://cdn.statically.io/gh/RedX29/VyreX@main/assets/background/NEW%20BTB%20BACKGROUND%20(1).png",
+  "https://cdn.statically.io/gh/RedX29/VyreX@main/assets/background/NEW%20BTB%20BACKGROUND%20(2).png",
+  "https://cdn.statically.io/gh/RedX29/VyreX@main/assets/background/NEW%20BTB%20BACKGROUND%20(3).png",
+  "https://cdn.statically.io/gh/RedX29/VyreX@main/assets/background/BTB%20BACKGROUND%20(4).jpg",
+  "https://cdn.statically.io/gh/RedX29/VyreX@main/assets/background/BTB%20BACKGROUND%20(5)%20REPLACEMENT.jpg"
+];
+var BG_ANIMS=["bgDrift1 14s","bgDrift2 16s","bgDrift3 15s","bgDrift4 17s","bgDrift5 14.5s"]; // unique slow zoom/pan speed per image
+var BG_OVERLAYS=[ // darker + uniform (no transparent center) so text stays readable everywhere; subtle mood tint per image
+  "none",
+  "radial-gradient(ellipse at 50% 45%,rgba(0,0,0,.30),rgba(0,0,0,.54) 100%),linear-gradient(180deg,rgba(30,14,6,.44),rgba(5,4,8,.6))",
+  "radial-gradient(ellipse at 50% 45%,rgba(0,0,0,.30),rgba(0,0,0,.54) 100%),linear-gradient(180deg,rgba(6,12,32,.44),rgba(5,4,8,.6))",
+  "radial-gradient(ellipse at 50% 45%,rgba(0,0,0,.32),rgba(0,0,0,.56) 100%),linear-gradient(180deg,rgba(32,6,16,.46),rgba(5,4,8,.62))",
+  "radial-gradient(ellipse at 50% 45%,rgba(0,0,0,.30),rgba(0,0,0,.54) 100%),linear-gradient(180deg,rgba(18,10,32,.44),rgba(5,4,8,.6))"
+];
+var curBg={type:"image"}; // background of the page currently shown — decides the next leave-transition
+function applyImageBg(idx){
+  if(idx==null||idx<0||!BG_IMAGES[idx])return; // home / invalid -> leave #site-bg untouched (the fixed hero covers it)
+  var sb=document.getElementById("site-bg"),img=document.getElementById("sb-img"),ov=document.getElementById("sb-ov");
+  if(img){img.style.backgroundImage="url('"+BG_IMAGES[idx]+"')";img.style.animation=BG_ANIMS[idx]+" ease-in-out infinite alternate";img.style.filter="";}
+  if(ov)ov.style.background=BG_OVERLAYS[idx];
+  if(sb)sb.style.display="";
+}
+function showVideoAsBg(){ // present the Mirai video as a paused background thumbnail (behind the content)
+  var vid=document.getElementById("mirai-video"),img=document.getElementById("sb-img"),ov=document.getElementById("sb-ov");
+  if(img)img.style.backgroundImage="none";       // let the video show through #site-bg
+  if(ov)ov.style.background=BG_OVERLAYS[0];        // neutral dark overlay keeps content legible over the video
+  if(vid){vid.classList.add("as-bg");vid.style.opacity="";vid.style.transition="";try{vid.pause();vid.currentTime=0;}catch(e){}}
+}
+function hideVideoBg(){ // return the video to its off-screen, transition-only state
+  var vid=document.getElementById("mirai-video");
+  if(vid){vid.classList.remove("as-bg");vid.style.display="";vid.style.opacity="";vid.style.transition="";try{vid.pause();vid.currentTime=0;}catch(e){}}
+}
+// Page background on normal navigation: fade #site-bg OUT (0.6s) as we leave, swap the image/overlay
+// (or the video bg), then reveal the new bg INSTANTLY — fadeout only, no fade-in, exactly like the hero
+// transition. The primitives (applyImageBg/showVideoAsBg/hideVideoBg) stay instant so the Mirai video
+// transition is unaffected.
+function applyBg(sel){
+  if(sel&&sel.home){hideVideoBg();return;} // home uses its fixed hero bg (it fades in with the page itself)
+  var sb=document.getElementById("site-bg");
+  if(sb)sb.style.opacity="0";              // fade OUT (0.6s) while leaving the current page
+  setTimeout(function(){
+    if(sel.type==="video")showVideoAsBg();else{hideVideoBg();applyImageBg(sel.idx);}
+    if(sb){                                // snap the new bg in with no fade-in...
+      sb.style.transition="none";
+      sb.style.opacity="1";
+      void sb.offsetWidth;                 // ...commit it, then restore the transition so the next fade-OUT still animates
+      sb.style.transition="";
+    }
+  },600);
+}
+function pickBg(){if(window.innerWidth>1024&&Math.random()<0.1)return{type:"video"};return{type:"image",idx:Math.floor(Math.random()*BG_IMAGES.length)};} // desktop: 10% Mirai video, else one of 5 images; mobile: image only (video disabled)
+
+// Full-screen Mirai video transition — fires only when leaving a page whose background IS the video.
+// The old page fades out gradually (1.2s) and the video plays from 0:00; at exactly 1:30 (90s) the video
+// fades out smoothly (0.6s) while the new page content fades in (0.8s). The destination's freshly-rolled
+// background is applied as it is revealed; the video then resets to 0:00 (or stays on as the next bg).
+var _miraiH=null;
+function clearMiraiHandlers(){if(_miraiH){var v=document.getElementById("mirai-video");if(v){v.removeEventListener("timeupdate",_miraiH.t);v.removeEventListener("ended",_miraiH.e);v.removeEventListener("error",_miraiH.r);}_miraiH=null;}}
+function miraiVideoPlay(from,to,newBg){
+  var vid=document.getElementById("mirai-video");
+  if(!vid){if(newBg)applyBg(newBg);revealPage(from,to,false,endTransition,0.8);return;} // no video element -> just reveal
+  clearMiraiHandlers();
+  var REVEAL_AT=90,done=false,safety;
+  // Leaving fadeout IDENTICAL to the hero's: the video stays as the visible background (its .as-bg state,
+  // z-0) while the old content fades out over it (the 1.2s fade set below) — NO instant full-screen cover.
+  // The video is promoted to the full-screen transition layer (z-8000) only AFTER that fadeout (see below),
+  // and it plays from 0:00 throughout so the 1:30 video fadeout/reveal stays exactly the same.
+  vid.style.transition="";
+  function finish(){
+    if(done)return;done=true;clearMiraiHandlers();clearTimeout(safety);
+    if(newBg&&newBg.type==="video"){              // next page also uses the video bg -> keep it on screen, demote to background
+      revealPage(from,to,false,endTransition,0.8);
+      showVideoAsBg();
+    }else{
+      if(newBg)applyImageBg(newBg.idx);           // reveal the destination's new image background behind the fading video
+      vid.style.transition="opacity .6s ease";vid.style.opacity="0"; // fade out the video smoothly (0.6s)
+      revealPage(from,to,false,endTransition,0.8);                   // fade in the new page content (0.8s)
+      setTimeout(function(){hideVideoBg();},620);  // reset video to 0:00 + hide
+    }
+  }
+  function onTime(){if(!done&&vid.currentTime>=REVEAL_AT)finish();}  // reveal at exactly 1:30
+  function onEnd(){finish();}
+  function onErr(){if(done)return;done=true;clearMiraiHandlers();clearTimeout(safety);if(newBg&&newBg.type==="video"){showVideoAsBg();}else{hideVideoBg();if(newBg)applyImageBg(newBg.idx);}revealPage(from,to,false,endTransition,0.8);} // playback failed -> just reveal
+  _miraiH={t:onTime,e:onEnd,r:onErr};
+  vid.addEventListener("timeupdate",onTime);vid.addEventListener("ended",onEnd);vid.addEventListener("error",onErr);
+  if(from){from.style.transition="opacity 0.9s ease-out";from.style.opacity="0";} // fade out the old page content gradually (0.9s)
+  try{vid.currentTime=0;}catch(e){}
+  var p=vid.play();if(p&&p.catch)p.catch(function(){onErr();});
+  // Once the leaving fadeout (0.9s) is done — old content gone, next page not yet revealed — promote the
+  // video to the full-screen transition layer (z-8000). Seamless (nothing visible changes) and it keeps
+  // the 1:30 reveal untouched.
+  setTimeout(function(){if(!done){vid.classList.remove("as-bg");vid.style.display="block";vid.style.opacity="1";vid.style.transition="";}},900);
+  safety=setTimeout(function(){finish();},95000); // stall guard: reveal even if 90s is never reached
+}
+
+// The hero page's own background image + overlay (matched into #site-bg when navigating TO home, so the
+// destination background is visible during the fadeout; #page-home's real .hero-bg then fades in over the
+// identical image afterwards).
+var HERO_BG_IMG="https://cdn.statically.io/gh/RedX29/VyreX@main/assets/background/BTB%20BACKGROUND%20(5).jpg";
+var HERO_BG_OV="radial-gradient(ellipse 80% 80% at 50% 46%,transparent 30%,rgba(26,13,46,.42) 72%,rgba(5,4,8,.82) 100%),linear-gradient(90deg,rgba(5,4,8,.86) 0%,rgba(5,4,8,.52) 46%,rgba(5,4,8,.2) 100%),radial-gradient(ellipse at 70% 60%,rgba(139,0,0,.14) 0%,transparent 50%)";
+
+// Apply the hero's leaving behaviour to EVERY transition: the DESTINATION background is shown instantly in
+// #site-bg, then the leaving page's content AND its background fade out TOGETHER (1.2s) to reveal it, then
+// the new content fades in (0.8s). The hero page's .hero-bg already lives inside #page-home and fades with
+// it; for every other page we momentarily paint the OLD #site-bg image+overlay onto the leaving page so its
+// background fades out together with the content the same way. (The Mirai video transition is untouched.)
+function crossFade(from,to,newBg){
+  var mob=window.innerWidth<=1024;          // mobile: quick 0.5s transition over the single fixed CSS background
+  var outDur=mob?0.25:0.8,outMs=mob?250:800,inDur=mob?0.25:0.5;
+  var leavingHome=from&&from.id==="page-home";
+  var img=document.getElementById("sb-img"),ov=document.getElementById("sb-ov"),sb=document.getElementById("site-bg");
+  if(!mob){
+    // 1) Show the DESTINATION background instantly in #site-bg (desktop only — mobile keeps one fixed CSS bg).
+    if(newBg&&newBg.home){
+      // non-hero -> hero: show the hero image (matched to .hero-bg) so it is what gets revealed as the old
+      // page fades out; #page-home's real .hero-bg then fades in over the identical image.
+      hideVideoBg();
+      if(img){img.style.backgroundImage="url('"+HERO_BG_IMG+"')";img.style.animation="heroDrift 14s ease-in-out infinite alternate";img.style.filter="brightness(.95) contrast(1.03) blur(.3px)";}
+      if(ov)ov.style.background=HERO_BG_OV;
+      if(sb)sb.style.display="";
+    }else if(newBg&&newBg.type==="video"){
+      showVideoAsBg();
+    }else if(newBg){
+      hideVideoBg();applyImageBg(newBg.idx);
+    }
+    // 2) Make the OLD background fade out WITH the content. The hero page already carries its .hero-bg inside
+    //    #page-home; every other page needs the previous #site-bg image+overlay painted onto the leaving page
+    //    element so it fades out together with the content (revealing the destination bg behind).
+    if(from&&!leavingHome&&curBg&&curBg.type==="image"&&curBg.idx!=null&&BG_IMAGES[curBg.idx]){
+      from.style.backgroundImage=BG_OVERLAYS[curBg.idx]+", url('"+BG_IMAGES[curBg.idx]+"')";
+      from.style.backgroundSize="cover";from.style.backgroundPosition="center";from.style.backgroundRepeat="no-repeat";
+    }
+  }
+  // 3) Fade the leaving page out (desktop 1.2s / mobile 0.25s).
+  if(from){from.style.transition="opacity "+outDur+"s ease-out";from.style.opacity="0";}
+  // 4) After the fadeout, reveal the new page content (desktop 0.8s / mobile 0.25s) — 0.5s total on mobile.
+  setTimeout(function(){revealPage(from,to,false,endTransition,inDur);},outMs);
+}
+
+function runTransition(from,to){
+  var leavingVideo=(curBg.type==="video")&&window.innerWidth>1024; // the dramatic Mirai video transition fires only on desktop, when leaving a video-bg page
+  var toHome=(to&&to.id==="page-home");      // home always keeps its fixed hero background — never randomized
+  var newBg=toHome?{type:"image",home:true}:pickBg(); // elsewhere: roll 10% Mirai video, else one of 5 pool images
+  if(leavingVideo){
+    miraiVideoPlay(from,to,newBg);
+  }else{
+    crossFade(from,to,newBg);                 // fade old content+bg out (1.2s), snap new bg in, fade new content in (0.8s)
+  }
+  curBg=newBg;
+}
+
+function goPage(name,idx){
+  idx=PAGES.indexOf(name);
+  if(idx<0||animating||idx===curIdx)return;animating=true;
+  currOpen=false;document.getElementById("curr-panel").classList.remove("open");
+  closeMobileMenu();
+  var from=document.getElementById("page-"+PAGES[curIdx]);
+  var to=document.getElementById("page-"+name);
+  curIdx=idx;
+  document.querySelectorAll(".nav-links a").forEach(function(a){a.classList.toggle("anav",a.getAttribute("data-p")===name);});
+  history.replaceState(null,null,"#"+name);
+  runTransition(from,to);
+}
+
+function switchView(to){
+  if(svAnim)return;svAnim=true;
+  var isRes=to==="reseller";
+  var fromEl=document.getElementById(isRes?"sv-partner":"sv-reseller");
+  var target=document.getElementById(isRes?"sv-reseller":"sv-partner");
+  fromEl.style.opacity="0";fromEl.style.transform="translateX("+(isRes?"-30px":"30px")+")";
+  setTimeout(function(){
+    fromEl.classList.add("hidden");fromEl.style.cssText="";
+    target.classList.remove("hidden");
+    target.style.cssText="opacity:0;transform:translateX("+(isRes?"30px":"-30px")+");transition:opacity .4s,transform .4s cubic-bezier(.16,1,.3,1)";
+    requestAnimationFrame(function(){requestAnimationFrame(function(){target.style.opacity="1";target.style.transform="translateX(0)";});});
+    document.getElementById("page-apply").scrollTop=0;
+    setTimeout(function(){target.style.cssText="";svAnim=false;},440);
+  },280);
+}
+
+// ════════════ SCROLL REVEAL ════════════
+var ro=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add("vis");});},{threshold:.07});
+document.querySelectorAll(".rv").forEach(function(r){ro.observe(r);});
+
+// ════════════ NOTIF ════════════
+function showNotif(msg,err){var n=document.getElementById("notif");n.textContent=msg;n.className=(err?"err ":"")+"show";setTimeout(function(){n.className="";},3000);}
+
+// ════════════ FORM ════════════
+function valE(iid,eid){var v=document.getElementById(iid).value.trim();var ok=/^[a-zA-Z0-9._%+\-]+@gmail\.com$/.test(v);document.getElementById(eid).style.display=(v.length>0&&!ok)?"block":"none";}
+async function submitForm(type){var isP=type==="partner";var ids=isP?{name:"p-name",dc:"p-discord",em:"p-email",ee:"p-ee",btn:"p-btn",btxt:"p-btxt",spin:"p-spin",fc:"pfc",ok:"p-ok"}:{name:"r-name",dc:"r-discord",em:"r-email",ee:"r-ee",btn:"r-btn",btxt:"r-btxt",spin:"r-spin",fc:"rfc",ok:"r-ok"};var name=document.getElementById(ids.name).value.trim(),dc=document.getElementById(ids.dc).value.trim(),em=document.getElementById(ids.em).value.trim();var req=isP?[name,dc,em,document.getElementById("p-type").value,document.getElementById("p-offer").value.trim()]:[name,dc,em,document.getElementById("r-platform").value];if(req.some(function(v){return!v;})){showNotif("⚠ Please fill in all required fields.",true);return;}if(!/^[a-zA-Z0-9._%+\-]+@gmail\.com$/.test(em)){showNotif("⚠ Please enter a valid @gmail.com address.",true);document.getElementById(ids.ee).style.display="block";return;}var btn=document.getElementById(ids.btn),btxt=document.getElementById(ids.btxt),spin=document.getElementById(ids.spin);btn.disabled=true;btxt.style.display="none";spin.style.display="block";try{var now=new Date(),ts=now.toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"})+" at "+now.toLocaleTimeString("en-US",{hour:"2-digit",minute:"2-digit"});var fields,title,desc;if(isP){var t2=document.getElementById("p-type").value,offer=document.getElementById("p-offer").value.trim(),links=document.getElementById("p-links").value.trim();title="\u{1F91D} New Partner Application";desc="Someone wants to partner with **VyreX**!";fields=[{name:"\u{1F464} Name",value:"```\n"+name+"\n```",inline:true},{name:"\u{1F3AE} Discord",value:"```\n"+dc+"\n```",inline:true},{name:"​",value:"​",inline:false},{name:"\u{1F4E7} Gmail",value:"```\n"+em+"\n```",inline:true},{name:"\u{1F3F7}️ Type",value:"```\n"+t2+"\n```",inline:true},{name:"​",value:"​",inline:false},{name:"\u{1F4BC} Offer",value:"```\n"+offer+"\n```",inline:false},{name:"\u{1F517} Links",value:links?"```\n"+links+"\n```":"Not provided",inline:false},{name:"\u{1F4CE} File",value:document.getElementById("p-file").files[0]?"✅ Attached":"❌ None",inline:true}];}else{var plat=document.getElementById("r-platform").value,proof=document.getElementById("r-proof").value.trim();title="\u{1F525} New Reseller Application";desc="Someone wants to join the **VyreX Reseller Network**!";fields=[{name:"\u{1F464} Name",value:"```\n"+name+"\n```",inline:true},{name:"\u{1F3AE} Discord",value:"```\n"+dc+"\n```",inline:true},{name:"​",value:"​",inline:false},{name:"\u{1F4E7} Gmail",value:"```\n"+em+"\n```",inline:true},{name:"\u{1F4F1} Platform",value:"```\n"+plat+"\n```",inline:true},{name:"​",value:"​",inline:false},{name:"\u{1F4CB} Experience",value:proof?"```\n"+proof+"\n```":"Not provided",inline:false},{name:"\u{1F4CE} File",value:document.getElementById("r-file").files[0]?"✅ Attached":"❌ None",inline:true}];}var payload={username:isP?"VyreX Partners":"VyreX Applications",embeds:[{title:title,description:desc,color:0xe8000d,fields:fields,footer:{text:"VyreX System · "+ts},timestamp:now.toISOString()}]};var hook=isP?P_HOOK:R_HOOK,file=isP?document.getElementById("p-file").files[0]:document.getElementById("r-file").files[0];if(file){var fd=new FormData();fd.append("payload_json",JSON.stringify(payload));fd.append("files[0]",file,file.name);await fetch(hook,{method:"POST",body:fd});}else await fetch(hook,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});document.getElementById(ids.fc).style.display="none";document.getElementById(ids.ok).style.display="block";showNotif("✓ Application submitted!",false);}catch(e){btn.disabled=false;btxt.style.display="block";spin.style.display="none";showNotif("⚠ Submission failed. Try again.",true);}}
+
+// ════════════ CUSTOM CURSOR ════════════
+(function(){
+  var dot=document.getElementById("cur"),ring=document.getElementById("cur-ring");
+  if(!dot||!ring)return;
+  var mx=0,my=0,rx=0,ry=0;
+  document.addEventListener("mousemove",function(e){mx=e.clientX;my=e.clientY;dot.style.left=mx+"px";dot.style.top=my+"px";});
+  document.addEventListener("mousedown",function(){ring.classList.add("click");setTimeout(function(){ring.classList.remove("click");},180);});
+  function hoverOn(){dot.classList.add("big");ring.classList.add("hover");}
+  function hoverOff(){dot.classList.remove("big");ring.classList.remove("hover");}
+  document.querySelectorAll("a,button,[onclick],.cp-card,.cp-opt,.cp-period,.svc,.bc,.pcard,.res-cta,.om-btn,.plink,.buy-tab,.rbx-tab,.nav-curr-btn").forEach(function(el){el.addEventListener("mouseenter",hoverOn);el.addEventListener("mouseleave",hoverOff);});
+  (function loop(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+"px";ring.style.top=ry+"px";requestAnimationFrame(loop);})();
+})();
+
+// ════════════ MOBILE ════════════
+function toggleMobile(){document.getElementById("hamburger").classList.toggle("open");document.getElementById("nav-links-el").classList.toggle("mob-open");}
+function closeMobileMenu(){document.getElementById("hamburger").classList.remove("open");document.getElementById("nav-links-el").classList.remove("mob-open");}
+
+// ════════════ BOKEH DEPTH LAYER ════════════
+(function(){
+  var reduced=window.matchMedia("(prefers-reduced-motion:reduce)").matches;if(reduced)return;
+  var layer=document.getElementById("bokeh-layer");
+  var colors=["rgba(255,184,77,.06)","rgba(196,30,58,.04)","rgba(232,149,107,.05)","rgba(45,27,78,.06)","rgba(139,0,0,.03)","rgba(255,140,66,.04)"];
+  var count=window.innerWidth<768?5:10;
+  for(var i=0;i<count;i++){
+    var b=document.createElement("div");b.className="bokeh-orb";
+    var sz=Math.random()*180+40;
+    b.style.cssText="width:"+sz+"px;height:"+sz+"px;left:"+(Math.random()*100)+"%;top:"+(Math.random()*100)+"%;background:"+colors[i%colors.length]+";animation-duration:"+(Math.random()*10+8)+"s;animation-delay:"+(Math.random()*5)+"s;";
+    layer.appendChild(b);
+  }
+})();
+
+// ════════════ HERO PETALS ════════════
+(function(){
+  var reduced=window.matchMedia("(prefers-reduced-motion:reduce)").matches;if(reduced)return;
+  var container=document.getElementById("hero-petals");if(!container)return;
+  var colors=["rgba(196,30,58,.5)","rgba(255,184,77,.4)","rgba(232,149,107,.45)","rgba(139,0,0,.35)"];
+  function spawn(){var p=document.createElement("div");p.className="hero-petal";var sz=Math.random()*6+3;var dur=Math.random()*5+4;p.style.cssText="width:"+sz+"px;height:"+sz+"px;left:"+(20+Math.random()*60)+"%;bottom:"+(Math.random()*30)+"%;"+"background:"+colors[Math.floor(Math.random()*colors.length)]+";"+"animation-duration:"+dur+"s;animation-delay:"+(Math.random()*2)+"s;";container.appendChild(p);setTimeout(function(){p.remove();},(dur+3)*1000);}
+  setInterval(spawn,800);for(var i=0;i<5;i++)setTimeout(spawn,i*400);
+})();
+
+// ════════════ TSPARTICLES ════════════
+(function(){
+  if(typeof tsParticles==="undefined")return;
+  var reduced=window.matchMedia("(prefers-reduced-motion:reduce)").matches;if(reduced)return;
+  var isMobile=window.innerWidth<768;
+  tsParticles.load("tsparticles",{
+    fpsLimit:60,
+    particles:{
+      number:{value:isMobile?15:35,density:{enable:true,area:900}},
+      color:{value:["#C41E3A","#FFB84D","#E8956B","#8B0000","#F5A623"]},
+      shape:{type:"circle"},
+      opacity:{value:{min:.1,max:.5},animation:{enable:true,speed:.5,minimumValue:.05}},
+      size:{value:{min:1,max:4},animation:{enable:true,speed:1,minimumValue:.5}},
+      move:{enable:true,speed:{min:.2,max:.8},direction:"none",outModes:"out",straight:false},
+      wobble:{enable:true,distance:8,speed:2}
+    },
+    detectRetina:true
+  });
+})();
+
+// ════════════ INIT ════════════
+setTimeout(function(){document.querySelectorAll("#page-home .rv").forEach(function(e){e.classList.add("vis");});},80);
+document.querySelector('[data-p="home"]').classList.add("anav");
+renderRbx();initCP();detectCountry();
+
+// Home shows its fixed hero background (the .hero-bg element). #site-bg drives the OTHER pages, so prime it
+// with a pool image (hidden behind the home hero) for an instant first navigation. curBg starts as an image
+// (home), so leaving home is always a crossfade.
+(function(){applyImageBg(0);})();
+
+// Handle hash on load (instant — no cinematic transition on first paint)
+(function(){var h=window.location.hash.replace("#","");var idx=PAGES.indexOf(h);if(idx>0){var home=document.getElementById("page-home");if(home){home.classList.remove("pact");}var to=document.getElementById("page-"+h);if(to){to.classList.add("pact");to.querySelectorAll(".rv").forEach(function(e){e.classList.add("vis");});}curIdx=idx;document.querySelectorAll(".nav-links a").forEach(function(a){a.classList.toggle("anav",a.getAttribute("data-p")===h);});}})();
+
+// ════════════ MOBILE ROTATE PROMPT ════════════
+(function(){
+  var prompt=document.getElementById("rotate-prompt");if(!prompt)return;
+  var btn=document.getElementById("rot-continue");
+  var dismissed=false;
+  var mq=window.matchMedia("(orientation:portrait)");
+  // Require BOTH a touch-capable device AND a small viewport, so the prompt never fires on desktop
+  // (even when a desktop window is narrowed below 1024px in a portrait aspect).
+  function isMobile(){return (("ontouchstart" in window)||navigator.maxTouchPoints>0)&&window.matchMedia("(max-width:1024px)").matches;}
+  function update(){
+    if(mq.matches && isMobile() && !dismissed){prompt.classList.add("show");}
+    else{prompt.classList.remove("show");}
+  }
+  // Re-show every time the device returns to portrait (reset the dismissal on each orientation change).
+  function onOrient(){dismissed=false;update();}
+  if(btn)btn.addEventListener("click",function(){dismissed=true;prompt.classList.remove("show");});
+  if(mq.addEventListener)mq.addEventListener("change",onOrient);else if(mq.addListener)mq.addListener(onOrient);
+  window.addEventListener("orientationchange",onOrient);
+  window.addEventListener("resize",update);
+  update();
+})();
+
+// ════════════ ACCESSIBILITY ENHANCEMENTS (additive — preserved logic untouched) ════════════
+(function(){
+  // 1. Keyboard operability for non-button elements driven by onclick.
+  //    Native <button>s are skipped — they already fire on Enter/Space.
+  document.querySelectorAll("[onclick]").forEach(function(el){
+    if(el.tagName.toLowerCase()==="button")return;
+    if(!el.hasAttribute("tabindex"))el.setAttribute("tabindex","0");
+    if(!el.hasAttribute("role"))el.setAttribute("role","button");
+    el.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();el.click();}});
+  });
+  // 2. Dynamically-rendered configurator + currency controls. A MutationObserver re-applies
+  //    keyboard support after every re-render, so initCP/renderPeriods/buildCurrList stay byte-for-byte unchanged.
+  var dynSel=".cp-card,.cp-opt,.cp-period,.cp-item,.rbx-row";
+  function enhanceDyn(){document.querySelectorAll(dynSel).forEach(function(el){
+    if(el.dataset.kb)return;el.dataset.kb="1";
+    if(!el.hasAttribute("tabindex"))el.setAttribute("tabindex","0");
+    if(!el.hasAttribute("role"))el.setAttribute("role","button");
+    el.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();el.click();}});
+  });}
+  enhanceDyn();
+  var mo=new MutationObserver(enhanceDyn);
+  ["cp-models","cp-rams","cp-storages","cp-androids","cp-periods","cp-list","rbx-rows"].forEach(function(id){var c=document.getElementById(id);if(c)mo.observe(c,{childList:true});});
+  // 3. Bind each form label to its control (element IDs preserved exactly).
+  document.querySelectorAll(".fg").forEach(function(fg){
+    var lbl=fg.querySelector("label"),inp=fg.querySelector("input,select,textarea");
+    if(lbl&&inp&&inp.id&&!lbl.htmlFor)lbl.htmlFor=inp.id;
+  });
+  // 4. Hide purely decorative layers from assistive tech.
+  ["cur","cur-ring","tsparticles","bokeh-layer","mirai-video"].forEach(function(id){
+    var e=document.getElementById(id);if(e)e.setAttribute("aria-hidden","true");
+  });
+  // 5. Label icon-only / ambiguous controls + name the nav landmark.
+  var lab={hamburger:"Toggle navigation menu","nav-curr":"Open currency selector"};
+  Object.keys(lab).forEach(function(id){var e=document.getElementById(id);if(e)e.setAttribute("aria-label",lab[id]);});
+  var navEl=document.querySelector("nav");if(navEl)navEl.setAttribute("aria-label","Primary");
+  // 6. Reflect the active section to assistive tech, wrapping goPage non-destructively.
+  function syncCurrent(){document.querySelectorAll(".nav-links a").forEach(function(a){a.setAttribute("aria-current",a.classList.contains("anav")?"page":"false");});}
+  syncCurrent();
+  var _gp=window.goPage;if(typeof _gp==="function"){window.goPage=function(n,i){_gp(n,i);syncCurrent();};}
+})();
+
+// ════════════ THEME (light / dark, persisted) ════════════
+function toggleTheme(){var on=document.body.classList.toggle("light");try{localStorage.setItem("vyrex-theme",on?"light":"dark");}catch(e){}var ic=document.querySelector("#nav-theme i");if(ic)ic.className=on?"fas fa-sun":"fas fa-moon";}
+(function(){try{if(localStorage.getItem("vyrex-theme")==="light"){document.body.classList.add("light");var ic=document.querySelector("#nav-theme i");if(ic)ic.className="fas fa-sun";}}catch(e){}})();
+</script>
+</body>
+</html>

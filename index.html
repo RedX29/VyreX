@@ -1237,7 +1237,7 @@ var HERO_BG_OV="radial-gradient(ellipse 80% 80% at 50% 46%,transparent 30%,rgba(
 // background fades out together with the content the same way. (The Mirai video transition is untouched.)
 function crossFade(from,to,newBg){
   var mob=window.innerWidth<=1024;          // mobile: quick 0.5s transition over the single fixed CSS background
-  var outDur=mob?0.25:0.7,outMs=mob?250:700,inDur=mob?0.25:0.1;
+  var outDur=mob?0.25:0.9,outMs=mob?250:900,inDur=mob?0.25:0.2;
   var leavingHome=from&&from.id==="page-home";
   var img=document.getElementById("sb-img"),ov=document.getElementById("sb-ov"),sb=document.getElementById("site-bg");
   if(!mob){

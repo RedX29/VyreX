@@ -4,6 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VyreX — Official Reseller Network</title>
+<meta name="description" content="VyreX — trusted reseller for discounted GenPlay cloud phones and Robux (covered, non-covered, and in-game gifting). Best prices, fast delivery. Pay via GCash, PayPal, or Binance.">
+<meta name="theme-color" content="#C41E3A">
+<!-- ═══ Open Graph / link embed (Discord, Facebook, etc.) ═══ -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VyreX">
+<meta property="og:title" content="VyreX — Official Reseller Network">
+<meta property="og:description" content="Trusted reseller for discounted cloud phones & Robux. Covered/Non-Covered + In-game Gifting. Pay via GCash, PayPal, or Binance — fast, secure delivery.">
+<meta property="og:url" content="https://reseller-vyrex.vercel.app/">
+<meta property="og:image" content="https://cdn.statically.io/gh/RedX29/VyreX@main/assets/background/image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="VyreX — Official Reseller Network">
+<meta name="twitter:description" content="Trusted reseller for discounted cloud phones & Robux. Pay via GCash, PayPal, or Binance — fast, secure delivery.">
+<meta name="twitter:image" content="https://cdn.statically.io/gh/RedX29/VyreX@main/assets/background/image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Quicksand:wght@300;400;500;600;700&family=Philosopher:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -277,6 +292,19 @@ nav.scrolled::before{background:rgba(5,4,8,.94);border-bottom-color:rgba(255,184
 .rbx-order{margin-top:2.2rem;padding-top:2.2rem;border-top:1px solid rgba(255,184,77,.05)}
 .rbx-order-t{font-family:var(--ft);font-size:.95rem;font-weight:700;margin-bottom:.3rem}
 .rbx-order-d{font-size:.82rem;color:rgba(232,230,240,.35);margin-bottom:1.4rem}
+/* Robux — in-game gifting calculator */
+.rbx-gift-panel{border-radius:10px;padding:1.6rem 1.7rem;align-self:start}
+.gp-t{font-family:var(--ft);font-size:.85rem;font-weight:700;margin-bottom:.4rem}
+.gp-d{font-size:.78rem;color:rgba(232,230,240,.4);line-height:1.55;margin-bottom:1.3rem}
+.gp-input-row{display:flex;align-items:center;gap:.6rem;margin-bottom:1.3rem}
+.gp-input{flex:1;background:rgba(5,4,8,.5);border:1px solid var(--border-g);border-radius:8px;padding:.85rem 1rem;color:var(--cream);font-family:var(--ft);font-size:1.15rem;font-weight:700;outline:none;transition:border-color .2s;-moz-appearance:textfield}
+.gp-input:focus{border-color:var(--gold)}
+.gp-input::-webkit-outer-spin-button,.gp-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.gp-unit{font-family:var(--fa);font-size:.72rem;font-weight:700;color:rgba(255,184,77,.6);letter-spacing:.08em}
+.gp-result{display:flex;align-items:baseline;justify-content:space-between;padding:1rem 1.2rem;background:rgba(255,184,77,.04);border:1px solid var(--border-g);border-radius:8px;margin-bottom:.7rem}
+.gp-result-l{font-family:var(--fa);font-size:.62rem;letter-spacing:.15em;color:rgba(232,230,240,.45);text-transform:uppercase}
+.gp-result-v{font-family:var(--ft);font-size:1.6rem;font-weight:700;color:var(--gold);text-shadow:var(--glow-g)}
+.gp-rate{font-size:.72rem;color:rgba(232,230,240,.32);font-family:var(--fa)}
 .buy-cards{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 .bc{border-radius:10px;padding:1.8rem;position:relative;overflow:hidden;transition:all .35s}
 .bc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent)}
@@ -368,6 +396,25 @@ nav.scrolled::before{background:rgba(5,4,8,.94);border-bottom-color:rgba(255,184
 .om-btn{display:flex;align-items:center;gap:.8rem;padding:1rem 1.4rem;border-radius:8px;border:1px solid var(--border-g);background:rgba(255,255,255,.02);transition:all .25s;font-family:var(--fa);font-size:.82rem}
 .om-btn:hover{border-color:rgba(255,184,77,.2);background:rgba(255,184,77,.04);transform:translateX(4px)}
 .om-btn-ico{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--ns),var(--pm));display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--gold)}
+
+/* ═══ PAYMENT METHOD SELECTOR ═══ */
+.pay-row{display:flex;gap:.6rem;flex-wrap:wrap}
+.pay-opt{display:flex;align-items:center;gap:.5rem;padding:.55rem .95rem;background:rgba(255,255,255,.02);border:1px solid rgba(255,184,77,.1);border-radius:7px;font-family:var(--fa);font-size:.72rem;font-weight:700;color:rgba(232,230,240,.5);transition:all .2s;cursor:pointer}
+.pay-opt:hover:not(.sel){border-color:rgba(255,184,77,.25);color:var(--cream)}
+.pay-opt.sel{border-color:var(--gold);background:rgba(255,184,77,.05);color:var(--cream);box-shadow:0 0 14px rgba(255,184,77,.1)}
+.pay-ico{width:20px;height:20px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.pay-ico svg{width:100%;height:100%;display:block}
+.pay-gcash{width:20px;height:20px;border-radius:5px;background:#007DFF;display:flex;align-items:center;justify-content:center;font-family:var(--ft);font-weight:900;font-size:.72rem;color:#fff;line-height:1}
+
+/* ═══ ORDER COPY BLOCK (modal) ═══ */
+.om-copy-wrap{background:rgba(5,4,8,.55);border:1px solid var(--border-g);border-radius:9px;padding:1rem 1.1rem;margin-bottom:1rem}
+.om-field{display:flex;gap:.5rem;font-size:.74rem;line-height:1.55;margin-bottom:.35rem;font-family:var(--fb)}
+.om-field:last-of-type{margin-bottom:0}
+.om-field-l{color:var(--gold);font-family:var(--fa);font-weight:700;letter-spacing:.04em;white-space:nowrap;flex-shrink:0}
+.om-field-v{color:var(--cream);font-weight:600;word-break:break-word}
+.om-copy-btn{display:flex;align-items:center;justify-content:center;gap:.55rem;width:100%;margin-top:.9rem;padding:.7rem 1rem;background:linear-gradient(135deg,var(--crimson),var(--blood));color:#fff;font-family:var(--fa);font-size:.66rem;font-weight:700;letter-spacing:.1em;border:none;border-radius:6px;cursor:pointer;transition:all .25s}
+.om-copy-btn:hover{box-shadow:var(--glow-c)}
+.om-copy-btn.copied{background:linear-gradient(135deg,#1f8a4c,#0f5c30)}
 
 /* ═══ NOTIF ═══ */
 #notif{position:fixed;top:5rem;right:1.5rem;z-index:600;background:var(--glass2);border:1px solid var(--border-g);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:.7rem 1.2rem;font-family:var(--fa);font-size:.65rem;letter-spacing:.06em;color:var(--cream);transform:translateX(130%);transition:transform .35s cubic-bezier(.16,1,.3,1);max-width:260px;backdrop-filter:blur(20px)}
@@ -778,8 +825,8 @@ body.light .cp-p-vx{color:#43365c}
     <li><a onclick="goPage('apply',5)" data-p="apply">Apply</a></li>
   </ul>
   <div class="nav-right">
-    <a class="nav-soc dc" href="https://discord.gg/jtQT43pjsz" target="_blank" rel="noopener" aria-label="Join our Discord"><i class="fab fa-discord"></i></a>
-    <a class="nav-soc fb" href="https://www.facebook.com/profile.php?id=61590158335637" target="_blank" rel="noopener" aria-label="Visit our Facebook"><i class="fab fa-facebook-f"></i></a>
+    <a class="nav-soc dc" href="https://discord.gg/34hbxcfC56" target="_blank" rel="noopener" aria-label="Join our Discord"><i class="fab fa-discord"></i></a>
+    <a class="nav-soc fb" href="https://www.facebook.com/profile.php?id=100087240414531" target="_blank" rel="noopener" aria-label="Visit our Facebook"><i class="fab fa-facebook-f"></i></a>
     <button class="nav-theme-btn" id="nav-theme" onclick="toggleTheme()" aria-label="Toggle light or dark mode"><i class="fas fa-moon"></i></button>
     <button class="nav-curr-btn" id="nav-curr" onclick="toggleCurr()"><div class="curr-dot"></div><span id="nav-curr-txt">Detecting...</span></button>
     <button class="hamburger" id="hamburger" onclick="toggleMobile()"><span></span><span></span><span></span></button>
@@ -800,13 +847,18 @@ body.light .cp-p-vx{color:#43365c}
   <div class="om-box iri">
     <button class="om-close" onclick="closeOM()">&#10005; CLOSE</button>
     <p class="om-tag">// Place Your Order</p>
-    <h2 class="om-title" id="om-title">Order Cloud Phone</h2>
-    <p class="om-cfg" id="om-cfg">&mdash;</p>
+    <h2 class="om-title" id="om-title">Your Order</h2>
     <div class="om-price" id="om-price">&mdash;</div>
-    <p class="om-sub">Choose your preferred platform. We respond fast &mdash; all payments via GCash, PayPal, or Binance.</p>
+    <div class="om-copy-wrap">
+      <div class="om-field"><span class="om-field-l">&#8226; ITEM WANTED :</span><span class="om-field-v" id="omf-item">&mdash;</span></div>
+      <div class="om-field"><span class="om-field-l">&#8226; QUANTITY :</span><span class="om-field-v" id="omf-qty">&mdash;</span></div>
+      <div class="om-field"><span class="om-field-l">&#8226; PAYMENT METHOD :</span><span class="om-field-v" id="omf-pay">&mdash;</span></div>
+      <button class="om-copy-btn" id="om-copy-btn" onclick="copyOrder()"><i class="fas fa-copy"></i> COPY ORDER DETAILS</button>
+    </div>
+    <p class="om-sub">Copy your order above, then send it to us via <strong style="color:var(--cream)">Discord</strong> or <strong style="color:var(--cream)">Facebook</strong> &mdash; we respond fast. Payments via GCash, PayPal, or Binance.</p>
     <div class="om-btns">
-      <a href="https://discord.gg/jtQT43pjsz" target="_blank" class="om-btn" onclick="sendOrder('Discord')"><div class="om-btn-ico"><i class="fab fa-discord"></i></div>Order via Discord</a>
-      <a href="https://www.facebook.com/profile.php?id=61590158335637" target="_blank" class="om-btn" onclick="sendOrder('Facebook')"><div class="om-btn-ico"><i class="fab fa-facebook-f"></i></div>Order via Facebook</a>
+      <a href="https://discord.gg/34hbxcfC56" target="_blank" class="om-btn" onclick="sendOrder('Discord')"><div class="om-btn-ico"><i class="fab fa-discord"></i></div>Send via Discord</a>
+      <a href="https://www.facebook.com/profile.php?id=100087240414531" target="_blank" class="om-btn" onclick="sendOrder('Facebook')"><div class="om-btn-ico"><i class="fab fa-facebook-f"></i></div>Send via Facebook</a>
     </div>
   </div>
 </div>
@@ -912,20 +964,27 @@ body.light .cp-p-vx{color:#43365c}
         </div>
       </div>
       <div class="rv" style="transition-delay:.2s"><p class="cp-lbl">Select Duration</p><div class="cp-periods-grid" id="cp-periods"></div></div>
+      <div class="rv" style="transition-delay:.22s"><p class="cp-lbl">Payment Method</p><div class="pay-row" id="cp-pay"></div></div>
       <div class="glass-card iri cp-buy-bar rv" style="transition-delay:.25s"><div><div class="cp-buy-sum" id="cp-buy-sum">&mdash;</div><div class="cp-buy-price" id="cp-buy-price">&mdash;</div></div><button class="btn-p" onclick="openOM('cp')"><i class="fas fa-shopping-cart"></i> Order Now</button></div>
     </div>
     <div class="buy-sec" id="bs-rbx">
-      <div class="rbx-tabs rv"><button class="rbx-tab active" id="tab-c" onclick="setTab('covered')">Tax Covered</button><button class="rbx-tab" id="tab-nc" onclick="setTab('noncovered')">Not Covered</button></div>
+      <div class="rbx-tabs rv"><button class="rbx-tab active" id="tab-c" onclick="setTab('covered')">Tax Covered</button><button class="rbx-tab" id="tab-nc" onclick="setTab('noncovered')">Not Covered</button><button class="rbx-tab" id="tab-g" onclick="setTab('gifting')">Ingame Gifting</button></div>
       <div class="rbx-layout rv" style="transition-delay:.1s">
-        <div class="rbx-tbl glass-card"><div class="rbx-thead"><div class="rbx-th">Robux</div><div class="rbx-th">Price (Converted)</div><div class="rbx-th" id="rbx-ph">Price (PHP)</div></div><div id="rbx-rows"></div></div>
+        <div class="rbx-tbl glass-card" id="rbx-table"><div class="rbx-thead"><div class="rbx-th">Robux</div><div class="rbx-th">Price (Converted)</div><div class="rbx-th" id="rbx-ph">Price (PHP)</div></div><div id="rbx-rows"></div></div>
+        <div class="rbx-gift-panel glass-card iri" id="rbx-gift-panel" style="display:none">
+          <h4 class="gp-t"><i class="fas fa-gift" style="color:var(--gold)"></i> In-game Gifting Calculator</h4>
+          <p class="gp-d">Enter how many Robux you want. The total updates automatically in your selected currency.</p>
+          <div class="gp-input-row"><input type="number" id="gift-input" class="gp-input" min="1" step="1" value="1000" placeholder="e.g. 1000" oninput="onGiftInput()"><span class="gp-unit">ROBUX</span></div>
+          <div class="gp-result"><span class="gp-result-l">Total Price</span><span class="gp-result-v" id="gift-total">&mdash;</span></div>
+          <div class="gp-rate" id="gift-rate-note">&mdash;</div>
+        </div>
         <div class="rbx-sb">
           <div class="rsc glass-card iri"><div class="rbx-gift-rate" id="rbx-gift-rate">&mdash;</div></div>
           <div class="rsc glass-card iri"><h4 class="rsc-t"><i class="fas fa-info-circle" style="color:var(--gold)"></i> How It Works</h4><div class="ri"><i class="fas fa-diamond"></i> Pick your Robux amount</div><div class="ri"><i class="fas fa-diamond"></i> Order via Discord or Facebook</div><div class="ri"><i class="fas fa-diamond"></i> Pay (GCash, PayPal, Binance)</div><div class="ri"><i class="fas fa-diamond"></i> Receive via gamepass method</div><div class="ri"><i class="fas fa-diamond"></i> Tax-covered = we pay the 30%</div></div>
         </div>
       </div>
-      <div class="rbx-order rv" style="transition-delay:.2s"><h3 class="rbx-order-t">Ready to Order?</h3><p class="rbx-order-d">Fast response &mdash; GCash, PayPal, Binance accepted</p>
-        <button class="rbx-order-btn" onclick="openOM('robux')"><i class="fas fa-shopping-cart"></i> Order Now</button>
-      </div>
+      <div class="rv" style="transition-delay:.18s;margin-top:1.6rem"><p class="cp-lbl">Payment Method</p><div class="pay-row" id="rbx-pay"></div></div>
+      <div class="glass-card iri cp-buy-bar rv" style="transition-delay:.22s;margin-top:1rem"><div><div class="cp-buy-sum" id="rbx-buy-sum">&mdash;</div><div class="cp-buy-price" id="rbx-buy-price">&mdash;</div></div><button class="btn-p" onclick="openOM('robux')"><i class="fas fa-shopping-cart"></i> Order Now</button></div>
     </div>
   </div>
 </div>
@@ -1055,32 +1114,55 @@ var CP_MODELS=[
     {ram:6,storage:64,android:"15",avail:20,usd:[1.0573,2.4204,5.1865,8.2962,22.4654,37.3154,72.4154],games:["Roblox","Free Fire","Play Together"]}
   ]}
 ];
-var RBX_COV=[{r:100,p:50},{r:200,p:95},{r:300,p:135},{r:400,p:165},{r:500,p:200},{r:600,p:230},{r:700,p:260},{r:800,p:300},{r:900,p:335},{r:1000,p:365}];
+var RBX_COV=[{r:100,p:50},{r:200,p:95},{r:300,p:135},{r:400,p:165},{r:500,p:200},{r:600,p:230},{r:700,p:260},{r:800,p:300},{r:900,p:335},{r:1000,p:350}];
 var RBX_NC=[{r:100,p:40},{r:200,p:70},{r:300,p:100},{r:400,p:125},{r:500,p:150},{r:600,p:175},{r:700,p:200},{r:800,p:215},{r:900,p:235},{r:1000,p:265}];
 var PAGES=["home","services","buy","partners","team","apply"];
 
 // ════════════ STATE ════════════
 var cc=COUNTRIES.find(function(x){return x.cur==="USD";})||COUNTRIES[0],ctab="covered",curIdx=0,animating=false,svAnim=false;
-var cpModel=null,cpRam=null,cpStorage=null,cpAndroid=null,cpPeriod=3,currOpen=false,omMode="cp",curOrder=null,rbxSel=0;
+var cpModel=null,cpRam=null,cpStorage=null,cpAndroid=null,cpPeriod=3,currOpen=false,omMode="cp",curOrder=null,rbxSel=0,giftRobux=1000;
 var EXTRA_OFF=0.95;   // your exclusive 5% off GenPlay's price (final = GenPlay * 0.95)
 // GenPlay's own discount per duration (used for the green -N% badge, when > 0)
 var GP_DISC={sd855:[0,40,40,40,0,0,0],exynos:[0,10,0,20,30,10,10],sd835:[0,10,0,20,30,10,10],sd865:[0,10,0,20,30,10,10],sd845:[0,20,20,20,0,0,0]};
 var VYREX_OFF=0.95;   // VyreX price is already 5% under GenPlay -> GenPlay = vyrex / VYREX_OFF
 var GIFT_RATE_PHP=0.32; // PHP per 1 Robux via in-game gifting
 
+// ════════════ PAYMENT METHODS ════════════
+var PAY_GCASH='<span class="pay-gcash">G</span>';
+var PAY_PAYPAL='<span class="pay-ico"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#0070E0" d="M15.607 4.653H8.941L6.645 19.251H1.82L4.862 0h7.995c3.754 0 6.375 2.294 6.473 5.513-.648-.478-2.105-.86-3.722-.86m6.57 5.546c0 3.41-3.01 6.853-6.958 6.853h-2.493L11.595 24H6.74l1.845-11.538h3.592c4.208 0 7.346-3.634 7.153-6.949a5.24 5.24 0 0 1 2.848 4.686M9.653 5.546h6.408c.907 0 1.942.222 2.363.541-.195 2.741-2.655 5.483-6.441 5.483H8.714Z"/></svg></span>';
+var PAY_BINANCE='<span class="pay-ico"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#F0B90B" d="M16.624 13.9202l2.7175 2.7154-7.353 7.353-7.353-7.352 2.7175-2.7164 4.6355 4.6595 4.6356-4.6595zm4.6366-4.6366L24 12l-2.7154 2.7164L18.5682 12l2.6924-2.7164zm-9.272.001l2.7163 2.6914-2.7164 2.7174v-.001L9.2721 12l2.7164-2.7154zm-9.2722-.001L5.4088 12l-2.6914 2.6924L0 12l2.7164-2.7164zM11.9885.0115l7.353 7.329-2.7174 2.7154-4.6356-4.6356-4.6355 4.6595-2.7174-2.7154 7.353-7.353z"/></svg></span>';
+var PAY_METHODS=[{id:"GCash",label:"GCash",ico:PAY_GCASH},{id:"PayPal",label:"PayPal",ico:PAY_PAYPAL},{id:"Binance",label:"Binance",ico:PAY_BINANCE}];
+var payMethod="GCash"; // pre-selected so every order is complete; user can switch
+function renderPay(){var html=PAY_METHODS.map(function(m){return'<div class="pay-opt'+(m.id===payMethod?" sel":"")+'" data-pay="'+m.id+'" onclick="selPay(\''+m.id+'\')">'+m.ico+'<span>'+m.label+'</span></div>';}).join("");["cp-pay","rbx-pay"].forEach(function(id){var el=document.getElementById(id);if(el)el.innerHTML=html;});}
+function selPay(id){payMethod=id;renderPay();if(cpModel)updateBuyBar();updateRbxBar();}
+
 // ════════════ CURRENCY ════════════
 function conv(p){var v=p*cc.r;if(v>=1000)return cc.s+Math.round(v).toLocaleString();if(v>=10)return cc.s+v.toFixed(2);if(v>=1)return cc.s+v.toFixed(2);return cc.s+v.toFixed(3);}
 function buildCurrList(q){var fil=COUNTRIES.filter(function(x){var s=(q||"").toLowerCase();return!s||x.n.toLowerCase().includes(s)||x.cur.toLowerCase().includes(s)||x.c.toLowerCase().includes(s);});var list=document.getElementById("cp-list");if(!list)return;list.innerHTML="";fil.forEach(function(x){var div=document.createElement("div");div.className="cp-item"+(x.c===cc.c?" active":"");div.innerHTML='<span class="flag">'+x.f+'</span><span class="cname">'+x.n+'</span><span class="ccur">'+x.cur+'</span>';div.addEventListener("click",function(){setCC(x.c);});list.appendChild(div);});}
-function setCC(code){cc=COUNTRIES.find(function(x){return x.c===code;})||COUNTRIES[0];document.getElementById("nav-curr-txt").textContent=cc.cur+" "+cc.f;renderRbx();if(cpModel)renderPeriods();buildCurrList(document.getElementById("cp-search").value);showNotif("\u{1F30D} "+cc.f+" "+cc.n+" — "+cc.cur,false);}
+function setCC(code){cc=COUNTRIES.find(function(x){return x.c===code;})||COUNTRIES[0];document.getElementById("nav-curr-txt").textContent=cc.cur+" "+cc.f;renderRbx();if(ctab==="gifting")renderGift();updateRbxBar();if(cpModel)renderPeriods();buildCurrList(document.getElementById("cp-search").value);showNotif("\u{1F30D} "+cc.f+" "+cc.n+" — "+cc.cur,false);}
 function toggleCurr(){currOpen=!currOpen;document.getElementById("curr-panel").classList.toggle("open",currOpen);if(currOpen){buildCurrList("");setTimeout(function(){document.addEventListener("click",closeCurrOut,{once:true,capture:true});},120);}}
 function closeCurrOut(e){if(!document.getElementById("curr-panel").contains(e.target)&&!document.getElementById("nav-curr").contains(e.target)){currOpen=false;document.getElementById("curr-panel").classList.remove("open");}}
-function detectCountry(){var USD=COUNTRIES.find(function(x){return x.cur==="USD";})||COUNTRIES[0];cc=USD;document.getElementById("nav-curr-txt").textContent=cc.cur+" "+cc.f;function applyCode(code,cur){var found=COUNTRIES.find(function(x){return x.c===code;})||COUNTRIES.find(function(x){return x.cur===cur;})||USD;cc=found;document.getElementById("nav-curr-txt").textContent=cc.cur+" "+cc.f;renderRbx();if(cpModel)renderPeriods();buildCurrList("");}function sig(){try{return AbortSignal.timeout(5000);}catch(e){return undefined;}}if(location.protocol==="file:")return;try{fetch("https://ipapi.co/json/",{signal:sig()}).then(function(r){return r.json();}).then(function(d){applyCode(d.country_code||"",d.currency||"");}).catch(function(){try{fetch("https://ip-api.com/json/?fields=countryCode,currency",{signal:sig()}).then(function(r){return r.json();}).then(function(d){applyCode(d.countryCode||"",d.currency||"");}).catch(function(){/* CORS/network — keep USD default */});}catch(e){}});}catch(e){/* geolocation unavailable — keep USD default */}}
+function detectCountry(){var USD=COUNTRIES.find(function(x){return x.cur==="USD";})||COUNTRIES[0];cc=USD;document.getElementById("nav-curr-txt").textContent=cc.cur+" "+cc.f;function applyCode(code,cur){var found=COUNTRIES.find(function(x){return x.c===code;})||COUNTRIES.find(function(x){return x.cur===cur;})||USD;cc=found;document.getElementById("nav-curr-txt").textContent=cc.cur+" "+cc.f;renderRbx();if(ctab==="gifting")renderGift();updateRbxBar();if(cpModel)renderPeriods();buildCurrList("");}function sig(){try{return AbortSignal.timeout(5000);}catch(e){return undefined;}}if(location.protocol==="file:")return;try{fetch("https://ipapi.co/json/",{signal:sig()}).then(function(r){return r.json();}).then(function(d){applyCode(d.country_code||"",d.currency||"");}).catch(function(){try{fetch("https://ip-api.com/json/?fields=countryCode,currency",{signal:sig()}).then(function(r){return r.json();}).then(function(d){applyCode(d.countryCode||"",d.currency||"");}).catch(function(){/* CORS/network — keep USD default */});}catch(e){}});}catch(e){/* geolocation unavailable — keep USD default */}}
 
 // ════════════ ROBUX ════════════
 function renderRbx(){var d=ctab==="covered"?RBX_COV:RBX_NC;if(rbxSel>=d.length)rbxSel=0;var ph=document.getElementById("rbx-ph");if(ph)ph.textContent="Price ("+cc.cur+")";var rows=document.getElementById("rbx-rows");if(rows)rows.innerHTML=d.map(function(x,i){return'<div class="rbx-row'+(i===rbxSel?" sel":"")+'" data-rbx="'+i+'" role="radio" aria-checked="'+(i===rbxSel)+'" onclick="selRbx('+i+')"><div class="rbx-cell rb"><img class="rbxi-img" src="https://cdn.statically.io/gh/RedX29/VyreX@main/assets/Robux-Icon.png" alt="Robux">'+x.r.toLocaleString()+'</div><div class="rbx-cell pr">'+conv(x.p)+'</div><div class="rbx-cell ph">₱'+x.p+'</div></div>';}).join("");var gr=document.getElementById("rbx-gift-rate");if(gr)gr.textContent="\u{1F4B0} Gift rate: "+conv(GIFT_RATE_PHP)+" / 1 Robux";}
-function selRbx(i){rbxSel=i;renderRbx();}
-function setTab(t){ctab=t;document.getElementById("tab-c").classList.toggle("active",t==="covered");document.getElementById("tab-nc").classList.toggle("active",t==="noncovered");renderRbx();}
-function switchBuyTab(tab){document.querySelectorAll(".buy-tab").forEach(function(b){b.classList.remove("active");});document.querySelectorAll(".buy-sec").forEach(function(s){s.classList.remove("active");});document.getElementById("bit-"+tab).classList.add("active");document.getElementById("bs-"+tab).classList.add("active");}
+function selRbx(i){rbxSel=i;renderRbx();updateRbxBar();}
+function setTab(t){ctab=t;
+  document.getElementById("tab-c").classList.toggle("active",t==="covered");
+  document.getElementById("tab-nc").classList.toggle("active",t==="noncovered");
+  document.getElementById("tab-g").classList.toggle("active",t==="gifting");
+  var isGift=t==="gifting";
+  var tbl=document.getElementById("rbx-table"),gp=document.getElementById("rbx-gift-panel");
+  if(tbl)tbl.style.display=isGift?"none":"";
+  if(gp)gp.style.display=isGift?"":"none";
+  renderRbx();if(isGift)renderGift();updateRbxBar();updateBuyHash();}
+function renderGift(){var inp=document.getElementById("gift-input");if(!inp)return;var amt=Math.max(0,parseInt(inp.value,10)||0);giftRobux=amt;var php=amt*GIFT_RATE_PHP;var tot=document.getElementById("gift-total");if(tot)tot.textContent=amt>0?conv(php):"—";var note=document.getElementById("gift-rate-note");if(note)note.textContent="Rate: "+conv(GIFT_RATE_PHP)+" / 1 Robux  ·  "+amt.toLocaleString()+" Robux";}
+function onGiftInput(){renderGift();updateRbxBar();}
+function updateRbxBar(){var s=document.getElementById("rbx-buy-sum"),pr=document.getElementById("rbx-buy-price");if(!s||!pr)return;if(ctab==="gifting"){var amt=giftRobux||0;var php=amt*GIFT_RATE_PHP;s.innerHTML='<strong>'+amt.toLocaleString()+' Robux</strong> · Ingame Gift · '+payMethod;pr.textContent=amt>0?conv(php):"—";}else{var d=ctab==="noncovered"?RBX_NC:RBX_COV;var sel=d[rbxSel]||d[0];var lbl=ctab==="noncovered"?"Not Covered":"Tax Covered";s.innerHTML='<strong>'+sel.r.toLocaleString()+' Robux</strong> · '+lbl+' · '+payMethod;pr.textContent=conv(sel.p);}}
+function switchBuyTab(tab){document.querySelectorAll(".buy-tab").forEach(function(b){b.classList.remove("active");});document.querySelectorAll(".buy-sec").forEach(function(s){s.classList.remove("active");});document.getElementById("bit-"+tab).classList.add("active");document.getElementById("bs-"+tab).classList.add("active");updateBuyHash();}
+// ════════════ BUY DEEP-LINKS (hash routing) ════════════
+function currentBuyHash(){var cpActive=document.getElementById("bs-cp").classList.contains("active");if(cpActive)return"buy-cloudphone";if(ctab==="noncovered")return"buy-robux-noncoveredtax";if(ctab==="gifting")return"buy-robux-ingame-gifting";return"buy-robux-coveredtax";}
+function updateBuyHash(){if(PAGES[curIdx]!=="buy")return;try{history.replaceState(null,null,"#"+currentBuyHash());}catch(e){}}
 
 // ════════════ CLOUD PHONE ════════════
 function uniq(arr){var o=[],s={};arr.forEach(function(v){if(!s[v]){s[v]=1;o.push(v);}});return o;}
@@ -1101,10 +1183,42 @@ function selStorage(s){cpStorage=s;var an=uniq(cpModel.variants.filter(function(
 function selAnd(a){cpAndroid=a;renderSelectors();renderPeriods();}
 function renderPeriods(){var v=getVariant();if(!v)return;var disc=(GP_DISC[cpModel.id])||[0,0,0,0,0,0,0];document.getElementById("cp-periods").innerHTML=PERIODS.map(function(p,i){var gp=baseFromUSD(v.usd[i]);var fin=gp*EXTRA_OFF;var perDay=fin/p.d;var isSel=i===cpPeriod;var gpD=disc[i];return'<div class="cp-period glass-card'+(isSel?" sel":"")+'" onclick="selPeriod('+i+')"><div class="cp-p-lbl">'+p.l+(gpD>0?' <span class="badge-gp">-'+gpD+'%</span>':'')+' <span class="badge-vx">-5%</span></div><div class="cp-p-vx">GenPlay <span class="vx-strike">'+conv(gp)+'</span></div><div class="cp-p-price">'+conv(fin)+'</div><div class="cp-p-per">~ '+conv(perDay)+'/day</div></div>';}).join("");updateBuyBar();}
 function selPeriod(i){cpPeriod=i;renderPeriods();}
-function updateBuyBar(){var v=getVariant();if(!v)return;var vyrex=baseFromUSD(v.usd[cpPeriod]);var fin=vyrex*EXTRA_OFF;var period=PERIODS[cpPeriod];var s=document.getElementById("cp-buy-sum");var pr=document.getElementById("cp-buy-price");if(s)s.innerHTML='<strong>'+cpModel.name+'</strong> · '+v.ram+'GB · '+v.storage+'GB · Android '+v.android+' · '+period.l+' · <span class="stk">\u{1F525} extra -5%</span>';if(pr)pr.textContent=conv(fin);}
-function openOM(mode){omMode=mode||"cp";var titleEl=document.getElementById("om-title");if(omMode==="robux"){var d=ctab==="covered"?RBX_COV:RBX_NC;var sel=d[rbxSel]||d[0];var taxLabel=ctab==="covered"?"Tax Covered":"Not Covered";curOrder={type:"robux",amount:sel.r,php:sel.p,price:conv(sel.p),tax:taxLabel};titleEl.textContent="Order Robux";document.getElementById("om-cfg").textContent=sel.r.toLocaleString()+" Robux | "+taxLabel+" | ₱"+sel.p;document.getElementById("om-price").textContent=conv(sel.p);document.getElementById("om").classList.add("open");return;}var v=getVariant();if(!v){showNotif("⚠ Please select a model first.",true);return;}var vyrex=baseFromUSD(v.usd[cpPeriod]);var fin=vyrex*EXTRA_OFF;var period=PERIODS[cpPeriod];curOrder={type:"cp",model:cpModel.name,ram:v.ram,storage:v.storage,android:v.android,duration:period.l,price:conv(fin)};titleEl.textContent="Order Cloud Phone";document.getElementById("om-cfg").textContent=cpModel.name+" | "+v.ram+"GB RAM | "+v.storage+"GB | Android "+v.android+" | "+period.l+" | \u{1F525} extra -5% applied";document.getElementById("om-price").textContent=conv(fin);document.getElementById("om").classList.add("open");}
+function updateBuyBar(){var v=getVariant();if(!v)return;var vyrex=baseFromUSD(v.usd[cpPeriod]);var fin=vyrex*EXTRA_OFF;var period=PERIODS[cpPeriod];var s=document.getElementById("cp-buy-sum");var pr=document.getElementById("cp-buy-price");if(s)s.innerHTML='<strong>'+cpModel.name+'</strong> · '+v.ram+'GB · '+v.storage+'GB · Android '+v.android+' · '+period.l+' · '+payMethod;if(pr)pr.textContent=conv(fin);}
+function openOM(mode){omMode=mode||"cp";var titleEl=document.getElementById("om-title");var item,qty,priceText,pay=payMethod;
+  if(omMode==="robux"){
+    if(ctab==="gifting"){
+      var amt=giftRobux||0;if(amt<=0){showNotif("⚠ Enter how many Robux you want first.",true);return;}var php=amt*GIFT_RATE_PHP;priceText=conv(php);
+      item="ROBUX VIA INGAME GIFT";qty=amt.toLocaleString()+" ROBUX";
+      curOrder={type:"gift",amount:amt,php:php,price:priceText,pay:pay};
+    }else{
+      var d=ctab==="noncovered"?RBX_NC:RBX_COV;var sel=d[rbxSel]||d[0];var taxLabel=ctab==="noncovered"?"Not Covered":"Tax Covered";var ctnct=ctab==="noncovered"?"NCT":"CT";priceText=conv(sel.p);
+      item="ROBUX VIA GAMEPASS";qty=sel.r.toLocaleString()+" ROBUX "+ctnct;
+      curOrder={type:"robux",amount:sel.r,php:sel.p,price:priceText,tax:taxLabel,pay:pay};
+    }
+    titleEl.textContent="Order Robux";
+  }else{
+    var v=getVariant();if(!v){showNotif("⚠ Please select a model first.",true);return;}var vyrex=baseFromUSD(v.usd[cpPeriod]);var fin=vyrex*EXTRA_OFF;var period=PERIODS[cpPeriod];priceText=conv(fin);
+    item="CLOUD PHONE";qty=cpModel.name.toUpperCase()+" / "+v.ram+"GB RAM / "+v.storage+"GB / ANDROID "+v.android+" / "+period.l.toUpperCase();
+    curOrder={type:"cp",model:cpModel.name,ram:v.ram,storage:v.storage,android:v.android,duration:period.l,price:priceText,pay:pay};
+    titleEl.textContent="Order Cloud Phone";
+  }
+  document.getElementById("omf-item").textContent=item;
+  document.getElementById("omf-qty").textContent=qty;
+  document.getElementById("omf-pay").textContent=pay.toUpperCase();
+  document.getElementById("om-price").textContent=priceText;
+  curOrder.copyText="• ITEM WANTED : "+item+"\n• QUANTITY : "+qty+"\n• PAYMENT METHOD : "+pay.toUpperCase();
+  var cb=document.getElementById("om-copy-btn");if(cb){cb.classList.remove("copied");cb.innerHTML='<i class="fas fa-copy"></i> COPY ORDER DETAILS';}
+  document.getElementById("om").classList.add("open");}
+function copyOrder(){if(!curOrder||!curOrder.copyText)return;var cb=document.getElementById("om-copy-btn");function done(){if(cb){cb.classList.add("copied");cb.innerHTML='<i class="fas fa-check"></i> COPIED!';}showNotif("✓ Order copied — paste it to us on Discord or Facebook.",false);}try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(curOrder.copyText).then(done,function(){fallbackCopy(curOrder.copyText);done();});}else{fallbackCopy(curOrder.copyText);done();}}catch(e){fallbackCopy(curOrder.copyText);done();}}
+function fallbackCopy(text){var ta=document.createElement("textarea");ta.value=text;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.focus();ta.select();try{document.execCommand("copy");}catch(e){}document.body.removeChild(ta);}
 function closeOM(){document.getElementById("om").classList.remove("open");}
-function sendOrder(platform){var o=curOrder;if(!o)return;var payload;if(o.type==="robux"){payload={username:"VyreX Orders",embeds:[{title:"Order Robux",description:"**Robux order**\n"+o.amount.toLocaleString()+" Robux ("+o.tax+")\n"+o.price+"\n(Clicked via "+platform+")",color:0xe8000d,fields:[{name:"Product",value:"Roblox Robux",inline:true},{name:"Amount",value:o.amount.toLocaleString()+" Robux",inline:true},{name:"Type",value:o.tax,inline:true},{name:"Price",value:o.price+" (₱"+o.php+")",inline:true},{name:"Platform",value:platform,inline:true}],footer:{text:"VyreX Order System"},timestamp:new Date().toISOString()}]};}else{payload={username:"VyreX Orders",embeds:[{title:"Order GenPlay Cloud Phone",description:o.model+" | "+o.ram+"GB RAM | Android "+o.android+" | "+o.duration+"\n"+o.price+"\n(Clicked via "+platform+")",color:0xe8000d,fields:[{name:"Model",value:o.model,inline:true},{name:"RAM",value:o.ram+"GB",inline:true},{name:"Storage",value:o.storage+"GB",inline:true},{name:"Android",value:"Android "+o.android,inline:true},{name:"Duration",value:o.duration,inline:true},{name:"Price",value:o.price,inline:true},{name:"Platform",value:platform,inline:true}],footer:{text:"VyreX Order System"},timestamp:new Date().toISOString()}]};}try{fetch('/api/webhook?type=order',{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)}).catch(function(){});}catch(e){}}
+function sendOrder(platform){var o=curOrder;if(!o)return;var fields,title;
+  if(o.type==="cp"){title="Order GenPlay Cloud Phone";fields=[{name:"Item",value:"Cloud Phone",inline:true},{name:"Model",value:o.model,inline:true},{name:"RAM",value:o.ram+"GB",inline:true},{name:"Storage",value:o.storage+"GB",inline:true},{name:"Android",value:"Android "+o.android,inline:true},{name:"Duration",value:o.duration,inline:true}];}
+  else if(o.type==="gift"){title="Order Robux (In-game Gift)";fields=[{name:"Item",value:"Robux via In-game Gift",inline:true},{name:"Amount",value:o.amount.toLocaleString()+" Robux",inline:true},{name:"PHP",value:"₱"+o.php.toFixed(2),inline:true}];}
+  else{title="Order Robux (Gamepass)";fields=[{name:"Item",value:"Robux via Gamepass",inline:true},{name:"Amount",value:o.amount.toLocaleString()+" Robux",inline:true},{name:"Type",value:o.tax,inline:true},{name:"PHP",value:"₱"+o.php,inline:true}];}
+  fields.push({name:"Price",value:o.price,inline:true});fields.push({name:"Payment",value:o.pay||"—",inline:true});fields.push({name:"Platform",value:platform,inline:true});
+  var payload={username:"VyreX Orders",embeds:[{title:title,description:(o.copyText||"")+"\n(Clicked via "+platform+")",color:0xe8000d,fields:fields,footer:{text:"VyreX Order System"},timestamp:new Date().toISOString()}]};
+  try{fetch('/api/webhook?type=order',{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)}).catch(function(){});}catch(e){}}
 document.getElementById("om").addEventListener("click",function(e){if(e.target===this)closeOM();});
 
 // ════════════ PAGE TRANSITIONS (Mirai video) ════════════
@@ -1286,7 +1400,7 @@ function goPage(name,idx){
   var to=document.getElementById("page-"+name);
   curIdx=idx;
   document.querySelectorAll(".nav-links a").forEach(function(a){a.classList.toggle("anav",a.getAttribute("data-p")===name);});
-  history.replaceState(null,null,"#"+name);
+  history.replaceState(null,null,"#"+(name==="buy"?currentBuyHash():name));
   runTransition(from,to);
 }
 
@@ -1380,15 +1494,42 @@ function closeMobileMenu(){document.getElementById("hamburger").classList.remove
 // ════════════ INIT ════════════
 setTimeout(function(){document.querySelectorAll("#page-home .rv").forEach(function(e){e.classList.add("vis");});},80);
 document.querySelector('[data-p="home"]').classList.add("anav");
-renderRbx();initCP();detectCountry();
+renderRbx();initCP();detectCountry();renderPay();updateRbxBar();
 
 // Home shows its fixed hero background (the .hero-bg element). #site-bg drives the OTHER pages, so prime it
 // with a pool image (hidden behind the home hero) for an instant first navigation. curBg starts as an image
 // (home), so leaving home is always a crossfade.
 (function(){applyImageBg(0);})();
 
-// Handle hash on load (instant — no cinematic transition on first paint)
-(function(){var h=window.location.hash.replace("#","");var idx=PAGES.indexOf(h);if(idx>0){var home=document.getElementById("page-home");if(home){home.classList.remove("pact");}var to=document.getElementById("page-"+h);if(to){to.classList.add("pact");to.querySelectorAll(".rv").forEach(function(e){e.classList.add("vis");});}curIdx=idx;document.querySelectorAll(".nav-links a").forEach(function(a){a.classList.toggle("anav",a.getAttribute("data-p")===h);});}})();
+// Handle hash on load (instant — no cinematic transition on first paint).
+// Supports deep-links to buy sub-tabs (#buy-cloudphone, #buy-robux-coveredtax,
+// #buy-robux-noncoveredtax, #buy-robux-ingame-gifting) AND guarantees the rotating
+// site background is visible — landing directly on a non-home page must NOT show a
+// black screen (home's fixed hero bg is hidden on other pages, so #site-bg must drive it).
+(function(){
+  var raw=window.location.hash.replace("#","");if(!raw)return;
+  var page=raw.split("-")[0];                 // "buy-robux-coveredtax" -> "buy"
+  var idx=PAGES.indexOf(page);if(idx<0)return;
+  if(idx>0){
+    var home=document.getElementById("page-home");if(home)home.classList.remove("pact");
+    var to=document.getElementById("page-"+page);
+    if(to){to.classList.add("pact");to.querySelectorAll(".rv").forEach(function(e){e.classList.add("vis");});}
+    curIdx=idx;
+    document.querySelectorAll(".nav-links a").forEach(function(a){a.classList.toggle("anav",a.getAttribute("data-p")===page);});
+    // Prime + reveal the rotating background so the page never lands on black.
+    hideVideoBg();
+    var bgi=Math.floor(Math.random()*BG_IMAGES.length);
+    applyImageBg(bgi);
+    curBg={type:"image",idx:bgi};
+    var sb=document.getElementById("site-bg");if(sb){sb.style.display="";sb.style.opacity="1";}
+  }
+  if(page==="buy"){
+    if(raw==="buy-robux-coveredtax"){switchBuyTab("rbx");setTab("covered");}
+    else if(raw==="buy-robux-noncoveredtax"){switchBuyTab("rbx");setTab("noncovered");}
+    else if(raw==="buy-robux-ingame-gifting"){switchBuyTab("rbx");setTab("gifting");}
+    else if(raw==="buy-cloudphone"){switchBuyTab("cp");}
+  }
+})();
 
 // ════════════ MOBILE ROTATE PROMPT ════════════
 (function(){

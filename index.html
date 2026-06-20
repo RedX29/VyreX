@@ -9,15 +9,15 @@
 <!-- ═══ Open Graph / link embed (Discord, Facebook, etc.) ═══ -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="VyreX">
-<meta property="og:title" content="VyreX — Official Reseller Network">
-<meta property="og:description" content="Trusted reseller for discounted cloud phones & Robux. Covered/Non-Covered + In-game Gifting. Pay via GCash, PayPal, or Binance — fast, secure delivery.">
+<meta property="og:title" content="〔 ᴠʏʀᴇx • ᴏꜰꜰɪᴄɪᴀʟ ʀᴇꜱᴇʟʟᴇʀ ɴᴇᴛᴡᴏʀᴋ 〕">
+<meta property="og:description" content="ᴛʀᴜꜱᴛᴇᴅ ʀᴇꜱᴇʟʟᴇʀ ꜰᴏʀ ᴄʟᴏᴜᴅ ᴘʜᴏɴᴇꜱ ᴀɴᴅ ɪɴ-ɢᴀᴍᴇ ᴄᴜʀʀᴇɴᴄɪᴇꜱ. ꜱᴇʀᴠɪɴɢ ɢʟᴏʙᴀʟʟʏ ꜰʀᴏᴍ ᴛʜᴇ ᴘʜɪʟɪᴘᴘɪɴᴇꜱ.">
 <meta property="og:url" content="https://reseller-vyrex.vercel.app/">
 <meta property="og:image" content="https://cdn.statically.io/gh/RedX29/VyreX@main/assets/background/image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="VyreX — Official Reseller Network">
-<meta name="twitter:description" content="Trusted reseller for discounted cloud phones & Robux. Pay via GCash, PayPal, or Binance — fast, secure delivery.">
+<meta name="twitter:title" content="〔 ᴠʏʀᴇx • ᴏꜰꜰɪᴄɪᴀʟ ʀᴇꜱᴇʟʟᴇʀ ɴᴇᴛᴡᴏʀᴋ 〕">
+<meta name="twitter:description" content="ᴛʀᴜꜱᴛᴇᴅ ʀᴇꜱᴇʟʟᴇʀ ꜰᴏʀ ᴄʟᴏᴜᴅ ᴘʜᴏɴᴇꜱ ᴀɴᴅ ɪɴ-ɢᴀᴍᴇ ᴄᴜʀʀᴇɴᴄɪᴇꜱ. ꜱᴇʀᴠɪɴɢ ɢʟᴏʙᴀʟʟʏ ꜰʀᴏᴍ ᴛʜᴇ ᴘʜɪʟɪᴘᴘɪɴᴇꜱ.">
 <meta name="twitter:image" content="https://cdn.statically.io/gh/RedX29/VyreX@main/assets/background/image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Quicksand:wght@300;400;500;600;700&family=Philosopher:wght@400;700&display=swap" rel="stylesheet">
@@ -850,9 +850,10 @@ body.light .cp-p-vx{color:#43365c}
     <h2 class="om-title" id="om-title">Your Order</h2>
     <div class="om-price" id="om-price">&mdash;</div>
     <div class="om-copy-wrap">
-      <div class="om-field"><span class="om-field-l">&#8226; ITEM WANTED :</span><span class="om-field-v" id="omf-item">&mdash;</span></div>
-      <div class="om-field"><span class="om-field-l">&#8226; QUANTITY :</span><span class="om-field-v" id="omf-qty">&mdash;</span></div>
-      <div class="om-field"><span class="om-field-l">&#8226; PAYMENT METHOD :</span><span class="om-field-v" id="omf-pay">&mdash;</span></div>
+      <div class="om-field"><span class="om-field-l">• ɪᴛᴇᴍ ᴡᴀɴᴛᴇᴅ ﹕</span><span class="om-field-v" id="omf-item">&mdash;</span></div>
+      <div class="om-field"><span class="om-field-l">• Qᴜᴀɴᴛɪᴛʏ ﹕</span><span class="om-field-v" id="omf-qty">&mdash;</span></div>
+      <div class="om-field"><span class="om-field-l">• ᴘʀɪᴄᴇ ﹕</span><span class="om-field-v" id="omf-price">&mdash;</span></div>
+      <div class="om-field"><span class="om-field-l">• ᴘᴀʏᴍᴇɴᴛ ᴍᴇᴛʜᴏᴅ ﹕</span><span class="om-field-v" id="omf-pay">&mdash;</span></div>
       <button class="om-copy-btn" id="om-copy-btn" onclick="copyOrder()"><i class="fas fa-copy"></i> COPY ORDER DETAILS</button>
     </div>
     <p class="om-sub">Copy your order above, then send it to us via <strong style="color:var(--cream)">Discord</strong> or <strong style="color:var(--cream)">Facebook</strong> &mdash; we respond fast. Payments via GCash, PayPal, or Binance.</p>
@@ -1198,15 +1199,16 @@ function openOM(mode){omMode=mode||"cp";var titleEl=document.getElementById("om-
     titleEl.textContent="Order Robux";
   }else{
     var v=getVariant();if(!v){showNotif("⚠ Please select a model first.",true);return;}var vyrex=baseFromUSD(v.usd[cpPeriod]);var fin=vyrex*EXTRA_OFF;var period=PERIODS[cpPeriod];priceText=conv(fin);
-    item="CLOUD PHONE";qty=cpModel.name.toUpperCase()+" / "+v.ram+"GB RAM / "+v.storage+"GB / ANDROID "+v.android+" / "+period.l.toUpperCase();
+    item="CLOUD PHONE";qty=cpModel.name.toUpperCase()+" | "+v.ram+"GB RAM | "+v.storage+"GB | ANDROID "+v.android+" | "+period.l.toUpperCase();
     curOrder={type:"cp",model:cpModel.name,ram:v.ram,storage:v.storage,android:v.android,duration:period.l,price:priceText,pay:pay};
     titleEl.textContent="Order Cloud Phone";
   }
   document.getElementById("omf-item").textContent=item;
   document.getElementById("omf-qty").textContent=qty;
+  document.getElementById("omf-price").textContent=priceText;
   document.getElementById("omf-pay").textContent=pay.toUpperCase();
   document.getElementById("om-price").textContent=priceText;
-  curOrder.copyText="• ITEM WANTED : "+item+"\n• QUANTITY : "+qty+"\n• PAYMENT METHOD : "+pay.toUpperCase();
+  curOrder.copyText="• ɪᴛᴇᴍ ᴡᴀɴᴛᴇᴅ ﹕ "+item+"\n• Qᴜᴀɴᴛɪᴛʏ ﹕ "+qty+"\n• ᴘʀɪᴄᴇ ﹕ "+priceText+"\n• ᴘᴀʏᴍᴇɴᴛ ᴍᴇᴛʜᴏᴅ ﹕ "+pay.toUpperCase();
   var cb=document.getElementById("om-copy-btn");if(cb){cb.classList.remove("copied");cb.innerHTML='<i class="fas fa-copy"></i> COPY ORDER DETAILS';}
   document.getElementById("om").classList.add("open");}
 function copyOrder(){if(!curOrder||!curOrder.copyText)return;var cb=document.getElementById("om-copy-btn");function done(){if(cb){cb.classList.add("copied");cb.innerHTML='<i class="fas fa-check"></i> COPIED!';}showNotif("✓ Order copied — paste it to us on Discord or Facebook.",false);}try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(curOrder.copyText).then(done,function(){fallbackCopy(curOrder.copyText);done();});}else{fallbackCopy(curOrder.copyText);done();}}catch(e){fallbackCopy(curOrder.copyText);done();}}
